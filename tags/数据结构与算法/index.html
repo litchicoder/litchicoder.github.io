@@ -11,15 +11,15 @@
   <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
   
   
-    <meta name="keywords" content="数据结构与算法,">
+    <meta name="keywords" content="">
   
 
   
-    <meta name="description" content="时间复杂度和空间复杂度">
+    <meta name="description" content="litchi,litchi blog">
   
   
   <link rel="icon" type="image/x-icon" href="/logo.png">
-  <title>时间复杂度和空间复杂度 [ litchi ]</title>
+  <title>tag: 数据结构与算法 [ litchi ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -72,95 +72,22 @@
 
   <div class="container" id="content-outer">
     <div class="inner" id="content-inner">
-      <div class="post-container">
-  <article class="post" id="post">
-    <header class="post-header text-center">
-      <h1 class="title">
-        时间复杂度和空间复杂度
-      </h1>
-      <span>
-        
-        <time class="time" datetime="2020-04-07T13:24:37.000Z">
+      
+<div class="page tag-page" id="tag">
+  <h3 title="数据结构与算法下的文章">数据结构与算法</h3>
+  
+    <div class="tag-item">
+      
+        <a href="/2020/04/07/时间复杂度和空间复杂度/">
+          时间复杂度和空间复杂度
+        </a>
+      
+      <time class="time" datetime="2020-04-07T13:24:37.000Z">
         2020-04-07
       </time>
-        
-      </span>
-      <span class="slash">/</span>
-      <span class="post-meta">
-      <span class="post-tags">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
-      </span>
-    </span>
-      <span class="slash">/</span>
-      <span class="read">
-      <span id="busuanzi_value_page_pv"></span> 点击
-    </span>
-      <span class="slash">/</span>
-    </header>
-
-    <div class="post-content">
-      <p>时间复杂度：执行算法所需要的时间</p>
-<p>空间复杂度：执行算法所需要的内存空间</p>
-<p>时间复杂度的定义：一般情况下，算法中基本操作重复执行的次数是问题规模n的某个函数，用T(n)表示，若有某个辅助函数f(n)，使得T(n)/f(n)的极限值（当n趋近于无穷大时）为不等于零的常数，则称f(n)是T(n)的同数量级函数</p>
-<ul>
-<li>通常将O(1)、O(n)、O(logn)、O(n2)等分别叫做常量阶、线性阶、对数阶、平方阶等</li>
-<li>推导大O阶方法：1.用常数1取代运行时间中的所有加法常数；2.修改后的运行次数函数中，值保留最高阶项；3.如果最高阶向存在且不是1，则去除与这个项相乘的常数</li>
-<li>常数阶O(1)：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int sum=0，n=100；</span><br><span class="line">sum=（1+n）*n/2;</span><br><span class="line">System.out.println(sum);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>线性阶O(n):</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">//O(1)的算法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>对数阶O(logn):</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int num=1;</span><br><span class="line">while(num&lt;n)&#123;</span><br><span class="line">num=num*2;</span><br><span class="line">//O(1)的算法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>平方阶O(n^2):</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">    for(int j=i;j++)&#123;</span><br><span class="line">    //O(1)的算法</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>常用的时间复杂度按照耗费的时间从小到大依次是：</li>
-</ul>
-<p><code>O(1)&lt;O(logn)&lt;O(n)&lt;O(nlogn)&lt;O(n²)&lt;O(n³)&lt;O(2ⁿ)&lt;O(n!)</code></p>
-
-    </div>
-
-    <div>全文完。</div>
-  </article>
-  <div class="toc-container">
-    
-
-  </div>
-</div>
-<div class="copyright">
-    <span>本作品采用</span>
-    <a href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>
-    <span>进行许可。 转载时请注明原文链接。</span>
-</div>
-<div class="share" style="width: 100%;">
-  
-</div>
-
-  
-    <div class="post-nav">
-      <div class="post-nav-item post-nav-next">
-        
-          <span>〈 </span>
-          <a href="/2020/02/05/面试积累/" rel="next" title="面试积累">
-          面试积累
-          </a>
-        
-      </div>
-  
-      <div class="post-nav-item post-nav-prev">
-          
-      </div>
     </div>
   
-
-
+</div>
     </div>
 
     

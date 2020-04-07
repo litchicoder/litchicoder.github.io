@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-04-07T15:05:07.753Z</updated>
+  <updated>2020-04-07T15:08:34.445Z</updated>
   <id>/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="/2020/04/07/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/"/>
     <id>/2020/04/07/时间复杂度和空间复杂度/</id>
     <published>2020-04-07T13:24:37.000Z</published>
-    <updated>2020-04-07T15:05:07.753Z</updated>
+    <updated>2020-04-07T15:08:34.445Z</updated>
     
     <content type="html"><![CDATA[<p>时间复杂度：执行算法所需要的时间</p><p>空间复杂度：执行算法所需要的内存空间</p><p>时间复杂度的定义：一般情况下，算法中基本操作重复执行的次数是问题规模n的某个函数，用T(n)表示，若有某个辅助函数f(n)，使得T(n)/f(n)的极限值（当n趋近于无穷大时）为不等于零的常数，则称f(n)是T(n)的同数量级函数</p><ul><li>通常将O(1)、O(n)、O(logn)、O(n2)等分别叫做常量阶、线性阶、对数阶、平方阶等</li><li>推导大O阶方法：1.用常数1取代运行时间中的所有加法常数；2.修改后的运行次数函数中，值保留最高阶项；3.如果最高阶向存在且不是1，则去除与这个项相乘的常数</li><li>常数阶O(1)：</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int sum=0，n=100；</span><br><span class="line">sum=（1+n）*n/2;</span><br><span class="line">System.out.println(sum);</span><br></pre></td></tr></table></figure><ul><li>线性阶O(n):</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">//O(1)的算法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>对数阶O(logn):</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int num=1;</span><br><span class="line">while(num&lt;n)&#123;</span><br><span class="line">num=num*2;</span><br><span class="line">//O(1)的算法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>平方阶O(n^2):</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">    for(int j=i;j++)&#123;</span><br><span class="line">    //O(1)的算法</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>常用的时间复杂度按照耗费的时间从小到大依次是：</li></ul><p><code>O(1)&lt;O(logn)&lt;O(n)&lt;O(nlogn)&lt;O(n²)&lt;O(n³)&lt;O(2ⁿ)&lt;O(n!)</code></p>]]></content>
     
@@ -36,6 +36,8 @@
     
     </summary>
     
+    
+      <category term="数据结构与算法" scheme="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
