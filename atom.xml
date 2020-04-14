@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-04-14T05:00:35.712Z</updated>
+  <updated>2020-04-14T14:23:37.425Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,77 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>树</title>
+    <link href="/2020/04/14/%E6%A0%91/"/>
+    <id>/2020/04/14/树/</id>
+    <published>2020-04-14T14:12:59.000Z</published>
+    <updated>2020-04-14T14:23:37.425Z</updated>
+    
+    <content type="html"><![CDATA[<p>树结构是一种非线性存储结构，存储的是具有“一对多”关系的数据元素的集合。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;树结构是一种非线性存储结构，存储的是具有“一对多”关系的数据元素的集合。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>字符串匹配算法</title>
+    <link href="/2020/04/14/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/"/>
+    <id>/2020/04/14/字符串匹配算法/</id>
+    <published>2020-04-14T06:49:35.000Z</published>
+    <updated>2020-04-14T14:10:29.663Z</updated>
+    
+    <content type="html"><![CDATA[<h3><span id="bf算法">BF算法</span></h3><p>首先原串与字串左端对齐，，如果第一个字符不匹配，字串向后移动逐一移动，当发现死一个第一个字符匹配后，当前位置下比较剩余字串的字符与原串是否匹配，直到全部匹配。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">对齐:</span><br><span class="line">litchicoder</span><br><span class="line">coder</span><br><span class="line"></span><br><span class="line">逐一移动 找到匹配字符:</span><br><span class="line">litchicoder</span><br><span class="line">      coder</span><br></pre></td></tr></table></figure><p>代码实现：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class BF &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int r = queryByBF(&quot;HelloWord&quot;, &quot;Word&quot;);</span><br><span class="line">        System.out.print(r == 0 ? &quot;字符串匹配失败&quot; : &quot;子字符串在原串的位置：&quot; + r);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @param s 原字符串</span><br><span class="line">     * @param t 需要匹配的子字符串位置</span><br><span class="line">     */</span><br><span class="line">    public static int queryByBF(String s, String t) &#123;</span><br><span class="line">        char[] a = s.toCharArray();</span><br><span class="line">        char[] b = t.toCharArray();</span><br><span class="line">        int i = 0, j = 0;</span><br><span class="line">        while (i &lt; s.length() &amp;&amp; j &lt; t.length()) &#123;</span><br><span class="line">            //比较字符</span><br><span class="line">            if (a[i] == b[j]) &#123;</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                //i后退重新匹配</span><br><span class="line">                i++;</span><br><span class="line">                j = 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (j &gt;= t.length()) &#123;</span><br><span class="line">            return i - t.length();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //匹配失败</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3><span id="kmp算法">KMP算法</span></h3><p>KMP算法是一种改进的字符串匹配算法，由D.E.Knuth，J.H.Morris和V.R.Pratt提出的，因此人们称它为克努特—莫里斯—普拉特操作（简称KMP算法）。KMP算法的核心是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是通过一个next()函数实现，函数本身包含了模式串的局部匹配信息。KMP算法的时间复杂度O(m+n)。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3&gt;&lt;span id=&quot;bf算法&quot;&gt;BF算法&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;首先原串与字串左端对齐，，如果第一个字符不匹配，字串向后移动逐一移动，当发现死一个第一个字符匹配后，当前位置下比较剩余字串的字符与原串是否匹配，直到全部匹配。&lt;/p&gt;
+&lt;figure class=&quot;hi
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>递归和分治</title>
+    <link href="/2020/04/14/%E9%80%92%E5%BD%92%E5%92%8C%E5%88%86%E6%B2%BB/"/>
+    <id>/2020/04/14/递归和分治/</id>
+    <published>2020-04-14T05:19:33.000Z</published>
+    <updated>2020-04-14T06:43:14.130Z</updated>
+    
+    <content type="html"><![CDATA[<h3><span id="递归">递归</span></h3><p>高级语言中，函数自己调用和调用其他函数并没有本质的不同，我们把一个直接调用自己或者通过一系列调用语句间接地调用自己的函数，称作递归函数。（ps：每个递归定义必须至少有一个条件，当满足这个条件时递归不再进行，即函数不再调用自身而是返回值）</p><h4><span id="斐波那契fibonacci数列">斐波那契(Fibonacci)数列</span></h4><p>如果说兔子在出生两个月后，就有繁殖能力，一对兔子每个月能生出一对小兔子来。假设所有兔子都不会死去，能够一直干下去，那么一年以后可以繁殖多少对兔子呢？</p><p><img src="fibonacci.jpg" alt=""></p><p>代码实现：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int Fib(int i)</span><br><span class="line">&#123;</span><br><span class="line">    if( i &lt; 2 )</span><br><span class="line">        return i == 0 ? 0 : 1;</span><br><span class="line">    return Fib(i-1) + Fib(i-2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3><span id="分治">分治</span></h3><p>在遥远的周朝，人们受生产力水平所限，无法管理庞大的土地和众多的人民，因此采用了封邦建国的封建制度，把土地一层一层划分下去，以达到分而治之的目的，这也许是最古老的分治法了：</p><p><img src="fenzhi.png" alt=""></p><h4><span id="汉诺塔问题">汉诺塔问题</span></h4><p>汉诺塔（又称河内塔）问题是源于印度一个古老传说的益智玩具。大梵天创造世界的时候做了三根金刚石柱子，在一根柱子上从下往上按照大小顺序摞着64片黄金圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一根柱子上。并且规定，在小圆盘上不能放大圆盘，在三根柱子之间一次只能移动一个圆盘。</p><p><img src="hanoi.jpg" alt=""></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class Hanoi &#123;</span><br><span class="line">    /**</span><br><span class="line">    * </span><br><span class="line">    * @param n 盘子的个数</span><br><span class="line">    * @param a 原来的柱子</span><br><span class="line">    * @param b 中间辅助柱子</span><br><span class="line">    * @param c 最终到达的目标珠子</span><br><span class="line">    */</span><br><span class="line">    public void hanoi(int n, char a, char b, char c) &#123;</span><br><span class="line">        if (n == 1) &#123;</span><br><span class="line">            move(a, c);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          //将n-1个盘子从a利用c移动到b盘子</span><br><span class="line">            hanoi(n - 1, a, c, b);</span><br><span class="line">            //将第n个盘子从a移动到c</span><br><span class="line">            move(a, c);</span><br><span class="line">            //将n-1个盘子从b利用a移动到c</span><br><span class="line">            hanoi(n - 1, b, a, c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // 移动盘子</span><br><span class="line">    private void move(char origin, char target) &#123;</span><br><span class="line">        System.out.println(&quot;方向:&quot; + origin + &quot;---&gt;&quot; + target);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Hanoi hanoi = new Hanoi();</span><br><span class="line">        hanoi.hanoi(3, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4><span id="快速排序">快速排序</span></h4><h4><span id="找出第n大的值">找出第n大的值</span></h4><h4><span id="直尺">直尺</span></h4><h4><span id="八皇后问题">八皇后问题</span></h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3&gt;&lt;span id=&quot;递归&quot;&gt;递归&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;高级语言中，函数自己调用和调用其他函数并没有本质的不同，我们把一个直接调用自己或者通过一系列调用语句间接地调用自己的函数，称作递归函数。（ps：每个递归定义必须至少有一个条件，当满足这个条件时递归不再进行，即函
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>栈和队列</title>
