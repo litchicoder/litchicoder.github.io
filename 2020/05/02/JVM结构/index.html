@@ -15,11 +15,11 @@
   
 
   
-    <meta name="description" content="类加载器子系统">
+    <meta name="description" content="JVM结构">
   
   
   <link rel="icon" type="image/x-icon" href="/logo.png">
-  <title>类加载器子系统 [ litchi ]</title>
+  <title>JVM结构 [ litchi ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -76,12 +76,12 @@
   <article class="post" id="post">
     <header class="post-header text-center">
       <h1 class="title">
-        类加载器子系统
+        JVM结构
       </h1>
       <span>
         
-        <time class="time" datetime="2020-04-26T11:16:43.000Z">
-        2020-04-26
+        <time class="time" datetime="2020-05-02T11:22:13.000Z">
+        2020-05-02
       </time>
         
       </span>
@@ -99,15 +99,15 @@
     </header>
 
     <div class="post-content">
-      <p><img src="classloader.jpg" alt=""></p>
-<h3><span id="类加载过程包括加载load-链接linking和初始化init">类加载过程包括加载（load）、链接（linking）和初始化（init）</span></h3><ul>
-<li>加载<br><strong><em>将字节码文件从数据源中加载到JVM内存中，生成JVM的认可的数据结构（也就是Class对象）</em></strong>，数据源可以是来自物理硬盘或者网络的jar文件、war文件、class文件等一些JVM可识别的文件格式结构（文件格式异常回报ClassFormatError）。  </li>
-<li>链接<br>链接是类加载的核心部分，分三个步骤：验证、准备和解析<br>1.验证（Verify）：保证字节流信息符合JVM规范，避免恶意数据危害JVM的安全运行（异常抛出VerifyError）。<br>2.准备（Prepare）：为类变量分配内存和为变量设置初始值。<br>3.解析（Resolve）：将符号应用转换为直接应用，符号应用就是一组符号来描述所应用的目标，直接应用就是直接指向目标的指针或句柄。  </li>
-<li>初始化<br>初始化主要是将静态变量赋值和执行静态代码块的一系列操作。</li>
+      <p>JVM(JavaVirtualMachine，Java虚拟机)JVM是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。Java语言最重要的特点就是跨平台运行。使用JVM就是为了支持与操作系统无关，实现跨平台（write once run anywhere）。JVM包含在JDK中的一部分。</p>
+<p><img src="JVM.jpg" alt=""></p>
+<ul>
+<li>类加载器子系统<br>类加载器子系统主要负责将二进制字节码文件加载成JVM识别的数据结构，并对其文件进行规则校验和一些初始化工作。具体分为三个阶段loading、linking和initialization：<br>loading阶段将字节码文件加载到JVM中，这里有四类加载器来完成，Bootstrap ClassLoader(C++实现，加载Java核心类库/java_home/lib/rt.jar里的类集合)、Extension ClassLoader（加载/java_home/lib/ext里的类集合）、App ClassLoader；<br>linking阶段又分为三个阶段：verify、prepare、resolution，verify阶段验证Class文件是否符合JVM语法规则（具体包括类文件信息、元数据信息、字节码验证和符号引用验证）；prepare阶段为变量设置默认初始值，也就是0值，ps：int是0 String null；resolution阶段将符号引用转化为直接应用；<br>initialization阶段完成静态变量的显式赋值和静态代码块的执行。</li>
+<li>运行时数据区<br>运行时数据区包括PC寄存器、虚拟机栈、本地方法栈、方法区、堆五部分组成。<br>1.PC寄存器保存下一条将要被执行指令的地址和线程一一对应，这样保证了再线程来回切换时可以回到之前执行的位置；<br>2.虚拟机栈用来描述java方法执行的内存模型，每个线程对应一个栈，栈内的栈帧对应java方法，栈帧结构又包括：局部变量表、操作数栈、动态链接和方法返回地址；<br>3.本地方法栈的功能和结构与虚拟机栈类似，区别在于它服务的对象是native方法；<br>4.方法区是一块线程共享的内存区域，保存类的版本/字段/方法/接口等描述信息以及常量、静态场景等，还有运行时常量池（Runtime Constant Pool）；<br>5.堆用来保存创建对象的主体，是最大的一块数据区，也是线程共享的内存区域。  </li>
+<li>执行引擎<br>执行引擎是将JVM字节码指令转化为本地物理机可识别的机器指令执行，是JVM的核心部分。  </li>
+<li>本地方法接口<br>本地接口的作用是融合不同的编程语言为java所用。</li>
+<li>本地方法库<br>为本地方法提供依赖支持。</li>
 </ul>
-<h3><span id="双亲委派机制">双亲委派机制</span></h3><p><img src="parents_delegate.jpg" alt=""></p>
-<p>双亲委派机制是在类加载过程中加载部分里的机制，加载器大致有启动类加载器Bootstrap ClassLoader（加载核心的类）、扩展类加载器Extension ClassLoader（ext path下的类）和应用类加载器Application ClassLoader（自定义）。<br>在执行类加载请求时，子加载器会先委托父类加载器执行；如果父类加载器还存在父类加载器就继续委托，一次递归找到其顶部启动类加载器；如果启动类加载器可以完成任务则将结果返回，倘若启动类加载器不能完成任务这时一次再让子类加载器尝试加载，这个过程叫双亲委派机制。</p>
-<h3><span id="双亲委派机制优点">双亲委派机制优点</span></h3><p>1.避免类重复加载<br>2.保护程序安全，防止核心API被篡改（java.lang.String）</p>
 
     </div>
 
@@ -115,11 +115,6 @@
   </article>
   <div class="toc-container">
     
-  <div id="toc" class="toc-article">
-    <strong class="toc-title">目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">类加载过程包括加载（load）、链接（linking）和初始化（init）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">双亲委派机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">双亲委派机制优点</span></a></li></ol>
-  </div>
-
 
   </div>
 </div>
@@ -137,19 +132,14 @@
       <div class="post-nav-item post-nav-next">
         
           <span>〈 </span>
-          <a href="/2020/04/21/查找算法/" rel="next" title="查找算法">
-          查找算法
+          <a href="/2020/04/26/类加载子系统/" rel="next" title="类加载器子系统">
+          类加载器子系统
           </a>
         
       </div>
   
       <div class="post-nav-item post-nav-prev">
           
-          <a href="/2020/05/02/JVM结构/" rel="prev" title="JVM结构">
-            JVM结构
-          </a>
-          <span>〉</span>
-        
       </div>
     </div>
   
