@@ -4,11 +4,36 @@
   
     
     <entry>
+      <title>GC机制</title>
+      <link href="/2020/05/07/GC%E6%9C%BA%E5%88%B6/"/>
+      <url>/2020/05/07/GC%E6%9C%BA%E5%88%B6/</url>
+      
+        <content type="html"><![CDATA[<p>垃圾回收机制是JVM持续运行的关键，当JVM在运行过程中会产生很多“无用”的对象，如果没有及时GC就会导致我们虚拟机运行效率的降低，从而引发系统的异常。在运行时数据区中程序计数器、虚拟机栈、本地方法栈是线程私有的，不需要进行垃圾回收。方法区和堆区线程共享需要进行垃圾回收，堆是Java虚拟机进行垃圾回收的主要场所，其次要场所是方法区。<br>垃圾回收分两步找到垃圾和回收垃圾，一般查找垃圾有两种方法引用计数法和可达性分析算法。<br><em>引用计数法</em>就是给每个创建的对象添加一个引用计数器，当有一地方引用它时引用计数器加1，当有引用消除时引用计数器减1。当引用计数器等于0时就表示该对象可收回。标记计数法存在的问题时当有两个或几个对象互相引用时，它们的引用计数器永远不会为0，就永远不会被回收。<br><em>可达性分析算法（根搜索算法）</em>以根对象作为根结点进行搜索，当有对象不可达时就认为该对象可回收，根对象一般指虚拟机栈中的引用对象、本地方法栈中JNI的引用对象、方法区中运行常量池中的引用对象、方法区中静态属性引用的对象、运行中的线程、由引导类加载器加载的对象、GC控制的对象。<br>垃圾回收算法有：<br>1.<em>标记-清除（mark–sweep）</em><br>标记所有需要回收的对象，之后统一回收。这是最基础的算法，后续的回收算法都是基于这个算法扩展的。缺点明显效率低，产生大量碎片。<br><img src="gc_mark_sweep.jpg" alt=""><br>2.<em>复制（copying）</em><br>将内存空间划分两块相等的区域，每次只使用其中的一块区域，垃圾回收时遍历正在使用的区域内对象，将正在使用的引用对象赋值到另一块区域。每次垃圾回收时只处理正在使用的对象，赋值成本低，赋值过去会进行整理，不存在内存碎片。缺点是需要双倍的内存空间，以空间换时间。<br><img src="gc_copying.jpg" alt=""><br>3.<em>标记-整理或压缩（mark–compact））</em><br>结合了复制和标记清除的优点，第一步标记所有需要回收的对象，第二部回收对象，并对存活对象进行整理（压缩）。<br><img src="gc_mark_compact.jpg" alt=""><br>4.<em>分代收集算法</em><br>根据对象生命周期的不同将对象分为新生代和老年代对象。新生代对象一般又分为Eden区(伊甸园)和两个Survivor区。新创建的u对象都在Eden区，当Eden区内存到达阈值就会出发Minor GC，这是就会把Eden区中的对象复制到其中一个Survivor区中，此时这些存活对象的生命存活计数会加1.这是Eden区空置，Eden区继续存放新创建的对象，当再次触发Minor Gc时，将此时Eden区的存活对象和之前一个Survivor区的存活对象复制到另外一个Survivor区中，同时它们的生命存活计数器加1，这个过程持续发生，当对象的存活计数器达到一定的阈值后触发“晋升”，新生代中的该对象就被放置到了老年代中。<br>老年代中的对象经过多次的GC就会是生命周期很长的对象。当老年代的内存达到阈值时触发Major GC，这是采用标记-整理或压缩（mark–compact）算法。<br><img src="gc_eden_survivor_minor_major.jpg" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> JVM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JVM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JVM结构</title>
       <link href="/2020/05/02/JVM%E7%BB%93%E6%9E%84/"/>
       <url>/2020/05/02/JVM%E7%BB%93%E6%9E%84/</url>
       
-        <content type="html"><![CDATA[<p>JVM(JavaVirtualMachine，Java虚拟机)JVM是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。Java语言最重要的特点就是跨平台运行。使用JVM就是为了支持与操作系统无关，实现跨平台（write once run anywhere）。JVM包含在JDK中的一部分。</p><p><img src="JVM.jpg" alt=""></p><ul><li>类加载器子系统<br>类加载器子系统主要负责将二进制字节码文件加载成JVM识别的数据结构，并对其文件进行规则校验和一些初始化工作。具体分为三个阶段loading、linking和initialization：<br>loading阶段将字节码文件加载到JVM中，这里有四类加载器来完成，Bootstrap ClassLoader(C++实现，加载Java核心类库/java_home/lib/rt.jar里的类集合)、Extension ClassLoader（加载/java_home/lib/ext里的类集合）、App ClassLoader；<br>linking阶段又分为三个阶段：verify、prepare、resolution，verify阶段验证Class文件是否符合JVM语法规则（具体包括类文件信息、元数据信息、字节码验证和符号引用验证）；prepare阶段为变量设置默认初始值，也就是0值，ps：int是0 String null；resolution阶段将符号引用转化为直接应用；<br>initialization阶段完成静态变量的显式赋值和静态代码块的执行。</li><li>运行时数据区<br>运行时数据区包括PC寄存器、虚拟机栈、本地方法栈、方法区、堆五部分组成。<br>1.PC寄存器保存下一条将要被执行指令的地址和线程一一对应，这样保证了再线程来回切换时可以回到之前执行的位置；<br>2.虚拟机栈用来描述java方法执行的内存模型，每个线程对应一个栈，栈内的栈帧对应java方法，栈帧结构又包括：局部变量表、操作数栈、动态链接和方法返回地址；<br>3.本地方法栈的功能和结构与虚拟机栈类似，区别在于它服务的对象是native方法；<br>4.方法区是一块线程共享的内存区域，保存类的版本/字段/方法/接口等描述信息以及常量、静态场景等，还有运行时常量池（Runtime Constant Pool）；<br>5.堆用来保存创建对象的主体，是最大的一块数据区，也是线程共享的内存区域。  </li><li>执行引擎<br>执行引擎是将JVM字节码指令转化为本地物理机可识别的机器指令执行，是JVM的核心部分。  </li><li>本地方法接口<br>本地接口的作用是融合不同的编程语言为java所用。</li><li>本地方法库<br>为本地方法提供依赖支持。</li></ul>]]></content>
+        <content type="html"><![CDATA[<p>JVM(JavaVirtualMachine，Java虚拟机)JVM是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。Java语言最重要的特点就是跨平台运行。使用JVM就是为了支持与操作系统无关，实现跨平台（write once run anywhere）。JVM包含在JDK中的一部分。</p><p><img src="JVM.jpg" alt=""></p><ul><li>类加载器子系统<br>类加载器子系统主要负责将二进制字节码文件加载成JVM识别的数据结构，并对其文件进行规则校验和一些初始化工作。具体分为三个阶段loading、linking和initialization：<br>loading阶段将字节码文件加载到JVM中，这里有四类加载器来完成，Bootstrap ClassLoader(C++实现，加载Java核心类库/java_home/lib/rt.jar里的类集合)、Extension ClassLoader（加载/java_home/lib/ext里的类集合）、App ClassLoader(package下定义的类)、User define ClassLoader（自定义类加载器）；<br>linking阶段又分为三个阶段：verify、prepare、resolution，verify阶段验证Class文件是否符合JVM语法规则（具体包括类文件信息、元数据信息、字节码验证和符号引用验证）；prepare阶段为变量设置默认初始值，也就是0值，ps：int是0 String null；resolution阶段将符号引用转化为直接应用；<br>initialization阶段完成静态变量的显式赋值和静态代码块的执行。</li><li>运行时数据区<br>运行时数据区包括PC寄存器、虚拟机栈、本地方法栈、方法区、堆五部分组成。<br>1.PC寄存器保存下一条将要被执行指令的地址和线程一一对应，这样保证了再线程来回切换时可以回到之前执行的位置；<br>2.虚拟机栈用来描述java方法执行的内存模型，每个线程对应一个栈，栈内的栈帧对应java方法，栈帧结构又包括：局部变量表、操作数栈、动态链接和方法返回地址；<br>3.本地方法栈的功能和结构与虚拟机栈类似，区别在于它服务的对象是native方法；<br>4.方法区是一块线程共享的内存区域，保存类的版本/字段/方法/接口等描述信息以及常量、静态场景等，还有运行时常量池（Runtime Constant Pool）；<br>5.堆用来保存创建对象的主体，是最大的一块数据区，也是线程共享的内存区域。  </li><li>执行引擎<br>执行引擎是将JVM字节码指令转化为本地物理机可识别的机器指令执行，是JVM的核心部分之一。  </li><li>本地方法接口<br>本地接口的作用是融合不同的编程语言为java所用。</li><li>本地方法库<br>为本地方法提供依赖支持。</li></ul>]]></content>
       
       
       

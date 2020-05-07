@@ -102,9 +102,9 @@
       <p>JVM(JavaVirtualMachine，Java虚拟机)JVM是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。Java语言最重要的特点就是跨平台运行。使用JVM就是为了支持与操作系统无关，实现跨平台（write once run anywhere）。JVM包含在JDK中的一部分。</p>
 <p><img src="JVM.jpg" alt=""></p>
 <ul>
-<li>类加载器子系统<br>类加载器子系统主要负责将二进制字节码文件加载成JVM识别的数据结构，并对其文件进行规则校验和一些初始化工作。具体分为三个阶段loading、linking和initialization：<br>loading阶段将字节码文件加载到JVM中，这里有四类加载器来完成，Bootstrap ClassLoader(C++实现，加载Java核心类库/java_home/lib/rt.jar里的类集合)、Extension ClassLoader（加载/java_home/lib/ext里的类集合）、App ClassLoader；<br>linking阶段又分为三个阶段：verify、prepare、resolution，verify阶段验证Class文件是否符合JVM语法规则（具体包括类文件信息、元数据信息、字节码验证和符号引用验证）；prepare阶段为变量设置默认初始值，也就是0值，ps：int是0 String null；resolution阶段将符号引用转化为直接应用；<br>initialization阶段完成静态变量的显式赋值和静态代码块的执行。</li>
+<li>类加载器子系统<br>类加载器子系统主要负责将二进制字节码文件加载成JVM识别的数据结构，并对其文件进行规则校验和一些初始化工作。具体分为三个阶段loading、linking和initialization：<br>loading阶段将字节码文件加载到JVM中，这里有四类加载器来完成，Bootstrap ClassLoader(C++实现，加载Java核心类库/java_home/lib/rt.jar里的类集合)、Extension ClassLoader（加载/java_home/lib/ext里的类集合）、App ClassLoader(package下定义的类)、User define ClassLoader（自定义类加载器）；<br>linking阶段又分为三个阶段：verify、prepare、resolution，verify阶段验证Class文件是否符合JVM语法规则（具体包括类文件信息、元数据信息、字节码验证和符号引用验证）；prepare阶段为变量设置默认初始值，也就是0值，ps：int是0 String null；resolution阶段将符号引用转化为直接应用；<br>initialization阶段完成静态变量的显式赋值和静态代码块的执行。</li>
 <li>运行时数据区<br>运行时数据区包括PC寄存器、虚拟机栈、本地方法栈、方法区、堆五部分组成。<br>1.PC寄存器保存下一条将要被执行指令的地址和线程一一对应，这样保证了再线程来回切换时可以回到之前执行的位置；<br>2.虚拟机栈用来描述java方法执行的内存模型，每个线程对应一个栈，栈内的栈帧对应java方法，栈帧结构又包括：局部变量表、操作数栈、动态链接和方法返回地址；<br>3.本地方法栈的功能和结构与虚拟机栈类似，区别在于它服务的对象是native方法；<br>4.方法区是一块线程共享的内存区域，保存类的版本/字段/方法/接口等描述信息以及常量、静态场景等，还有运行时常量池（Runtime Constant Pool）；<br>5.堆用来保存创建对象的主体，是最大的一块数据区，也是线程共享的内存区域。  </li>
-<li>执行引擎<br>执行引擎是将JVM字节码指令转化为本地物理机可识别的机器指令执行，是JVM的核心部分。  </li>
+<li>执行引擎<br>执行引擎是将JVM字节码指令转化为本地物理机可识别的机器指令执行，是JVM的核心部分之一。  </li>
 <li>本地方法接口<br>本地接口的作用是融合不同的编程语言为java所用。</li>
 <li>本地方法库<br>为本地方法提供依赖支持。</li>
 </ul>
@@ -140,6 +140,11 @@
   
       <div class="post-nav-item post-nav-prev">
           
+          <a href="/2020/05/07/GC机制/" rel="prev" title="GC机制">
+            GC机制
+          </a>
+          <span>〉</span>
+        
       </div>
     </div>
   
