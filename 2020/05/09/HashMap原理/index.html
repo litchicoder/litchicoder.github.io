@@ -251,7 +251,7 @@ final Node&lt;K,V&gt; getNode(int hash, Object key) {
 </code></pre><p><code>`</code></p>
 <p>get方法相对简单直接通过key和hash取查找元素，如果是table中的first直接返回如果是tree从tree遍历g得到，如果是链表遍历拿到。  </p>
 <ul>
-<li>总结<br><em>hash()方法的关键是高位左移的操作，目的是为了使得hash趋于均匀分布，避免hash冲突（碰撞），在与table.length取与获得index时尽降低形成链</em><br><em>put()方法完成table创建和初始化和新增Node，新增Node分三个场景直接放置在table[index]位置；形成链表的插入链表中，链表达到阈值形成红黑树</em><br><em>resize()方法完成 两倍扩展以及扩展后的Node的重新放置，这里重要是巧妙的使用 (e.hash &amp; oldCap) == 0来作为是否将老链表数据分开放置的处理，利用扩容和2的幂的关系进行操作</em></li>
+<li>总结<br><em>hash()方法的关键是高位右移的操作，目的是为了使得hash趋于均匀分布，避免hash冲突（碰撞），在与table.length取与获得index时尽降低形成链</em><br><em>put()方法完成table创建和初始化和新增Node，新增Node分三个场景直接放置在table[index]位置；形成链表的插入链表中，链表达到阈值形成红黑树</em><br><em>resize()方法完成 两倍扩展以及扩展后的Node的重新放置，这里重要是巧妙的使用 (e.hash &amp; oldCap) == 0来作为是否将老链表数据分开放置的处理，利用扩容和2的幂的关系进行操作</em></li>
 </ul>
 
     </div>
