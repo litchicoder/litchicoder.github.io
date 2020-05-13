@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-05-13T03:47:57.043Z</updated>
+  <updated>2020-05-13T11:54:36.008Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关键字volatile和synchronize</title>
+    <link href="/2020/05/13/%E5%85%B3%E9%94%AE%E5%AD%97volatile%E5%92%8Csynchronize/"/>
+    <id>/2020/05/13/关键字volatile和synchronize/</id>
+    <published>2020-05-13T03:51:19.000Z</published>
+    <updated>2020-05-13T11:54:36.008Z</updated>
+    
+    <content type="html"><![CDATA[<p>volatile ：ˈvälətl<br>synchronize ：ˈsiNGkrəˌnaīz</p><ul><li>JAVA内存模型（JAVA Memory Model JMM）  </li></ul><p>JAVA内存模型定义了程序中各个变量的访问规则，即JVM将共享变量从内存存取的底层细节。<br><em>主内存是线程共享的区域例如堆和方法区，而工作内存实现线程私有的，例如PC寄存器、虚拟机栈</em><br>JMM规定所有共享变量都存储在主内存中，每条线程拥有自己的工作内存（比作缓冲区的概念），线程的工作内存中保存了主内存变量的拷贝副本。线程对共享变量的操作都在工作内存中进行，工作内存在线程是私有的，其他线程无法访问，变量的传递都是通过主内存来完成。   </p><p><img src="java_memory_model.jpg" alt=""></p><p>主内存与工作内存同步的中操作：  </p><ol><li>lock（锁定）：作用于主内存的变量，把一个变量标识为一条线程的独占状态；  </li><li>unlock（解锁）：作用于主内存的变量，将一个变量从lock状态解锁，释放出来的该变量才能被其他线程lock；  </li><li>read（读取）：作用于主内存的变量，将一个变量的值从主内存传输大工作内存，以便于后面的load操作使用；  </li><li>load（载入）：作用于工作内存，把read操作从主内存得到的变量值放到工作内存的变量副本中；  </li><li>use（使用）：作用于工作内存的变量，把一个工作内存中的变量值传递给执行引擎，当虚拟机遇到一个需要使用变量的值的字节码指令时就会执行该操作；  </li><li>assign（赋值）：作用于工作内存的变量，把一个从执行引擎收到的值赋值给工作内存的变量，当虚拟机遇到一个需要给变量赋值的字节码指令时就会执行该操作；  </li><li>store（存储）：作用于工作内存的变量，把一个工作内存中的变量的值传送到主内存中，以便于随后的write操作；  </li><li>write（写入）：作用于主内存的变量，把store操作从工作内存中的一个变量的值传送到主内存的变量中。  </li></ol><p>3个特性：<br>1.原子性（Atomicity）：原子代表不可分割的最小单位。原子性指一个操作或多个操作要么全部执行，要么就都不执行。例如银行转账操作 A账户减去10000元和B账户增加10000元必须全部执行，否则就会出现错误，这两个操作不可再分割。<br>read、load、use、assign、store、write操作都保证了原子性的操作，基本数据类型的读取大致都具有原子性。更大范围保证原子性JMM提供了lock和unlock操作，JVM提供了更高层次的字节码指令monitorenter和monitorexit来隐式使用这两个操作，这两个字节码指令反映到Java代码中就是同步块——synchronized关键字，因此在synchronized块之间的操作也具备原子性。<br>2.可见性（Visibility）：一个线程中堆共享变量（类中的成员变量或静态变量）的修改，其他线程立即得知这个修改。<br>保证可见性的操作：<br>volatile：volatile的特殊规则保证了新值立即同步到主内存中，以及每次使用前立即从主内存中刷新。<br>synchronize：synchronize关键字在释放锁之前，必须到此变量同步回主内存中（执行了store、write操作）。<br>final：final修饰的变量，一旦完成初始化，其他线程就能看见final字段的值。<br>3.有序性（Orderly）：有序性主要涉及了指令重排序现象和“工作内存与主内存同步延迟”现象。总结为一句话：如果在本线程内观察，所有的操作都是有序的；如果在一个线程中观察另一个线程，所有的操作都是无序的。<br>为了执行的效率，有时候会发生指令重排，这在单线程中指令重排之后的输出与我们的代码逻辑输出还是一致的。但在多线程中就可能发生问题，volatile在一定程度上可以避免指令重排。</p><ul><li>volatile和synchronize  <blockquote><p>synchronize保证了原子性和可见性，JMM中synchronize块执行流程清空工作内存-&gt;在主内存中拷贝变量值到工作内存的副本中-&gt;执行完代码-&gt;将更新后的共享变量值刷新到主内存中-&gt;释放同步锁<br>volatile保证了可见性和有序性。线程中volatile修饰的变量对其他线程共享变量的修改是可立即看见的。有序性上volatile可以一定程度避免指令重排，volatile在生成指令上回家一个lock前缀，这个前缀相当于内存屏障可以避免指令重排序不能把后面的指令重排序到内存屏障之前的位置。<br>synchronize作用于代码块和方法，而volatile是变量修饰符。<br>volatile不会造成线程的阻塞,而synchronize可能会造成线程阻塞。</p></blockquote></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      JAVA基础
+    
+    </summary>
+    
+      <category term="JAVA基础" scheme="/categories/JAVA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="JAVA基础" scheme="/tags/JAVA%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>join方法</title>
@@ -506,26 +528,6 @@
     
     
       <category term="Android 存储" scheme="/tags/Android-%E5%AD%98%E5%82%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>android 中gradle依赖冲突解决</title>
-    <link href="/2017/11/24/android-%E4%B8%ADgradle%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3/"/>
-    <id>/2017/11/24/android-中gradle依赖冲突解决/</id>
-    <published>2017-11-24T07:00:34.000Z</published>
-    <updated>2020-05-07T11:08:30.756Z</updated>
-    
-    <content type="html"><![CDATA[<p>android项目开发中经常会遇到库依赖异常，大多是版本依赖的冲突问题，说明下常见的版本依赖冲突解决方式</p><p>首页看下我们项目的依赖关系<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew dependencies :app:dependencies</span><br></pre></td></tr></table></figure></p><p><img src="2847241-08589a6078bf5336.png" alt="依赖包结构" title="依赖包结构"></p><blockquote><p>:app表示依赖module<br>mac下运行可能人别不了命令行，运行<figure class="highlight plain"><figcaption><span>+x gradlew ```添加权限</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">可以看到依赖结构是树状结构，各库下又依赖了android的官方提供的一些库，如果依赖的库不是太多的话，可以使用transitive参数，使得依赖库所需的依赖不直接使用，在依赖库的module中同一级上做依赖关系</span><br><span class="line">``` </span><br><span class="line">implementation &apos;com.android.support:appcompat-v7:26.1.0&apos; </span><br><span class="line">    compile (&apos;com.alibaba.android:vlayout:1.2.2@aar&apos;) &#123;</span><br><span class="line">        transitive = false</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p></blockquote><p>transitive为false表示单独依赖，true为默认树状依赖</p><p>这种解决方式只用于当前的依赖包只是版本导致的，且版本变动不大，起码它的代码package路径一致，如果差异很大可以指定依赖关系中特定包不包含到依赖中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">implementation &apos;com.android.support:appcompat-v7:26.1.0&apos;</span><br><span class="line">    compile (&apos;com.alibaba.android:vlayout:1.2.2@aar&apos;) &#123;</span><br><span class="line">        exclude group: &apos;support-v4&apos;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      android项目开发中经常会遇到库依赖异常，大多是版本依赖的冲突问题，说明下常见的版本依赖冲突解决方式
-    
-    </summary>
-    
-    
-      <category term="gradle" scheme="/tags/gradle/"/>
     
   </entry>
   
