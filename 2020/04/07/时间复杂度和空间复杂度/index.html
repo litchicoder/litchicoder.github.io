@@ -103,19 +103,19 @@
 <li>推导大O阶方法：1.用常数1取代运行时间中的所有加法常数；2.修改后的运行次数函数中，值保留最高阶项；3.如果最高阶向存在且不是1，则去除与这个项相乘的常数</li>
 <li>常数阶O(1)：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int sum=0，n=100；</span><br><span class="line">sum=（1+n）*n/2;</span><br><span class="line">System.out.println(sum);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum=<span class="number">0</span>，n=<span class="number">100</span>；</span><br><span class="line">sum=（<span class="number">1</span>+n）*n/<span class="number">2</span>;</span><br><span class="line">System.out.println(sum);</span><br></pre></td></tr></table></figure>
 <ul>
 <li>线性阶O(n):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">//O(1)的算法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line"><span class="comment">//O(1)的算法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>对数阶O(logn):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int num=1;</span><br><span class="line">while(num&lt;n)&#123;</span><br><span class="line">num=num*2;</span><br><span class="line">//O(1)的算法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(num&lt;n)&#123;</span><br><span class="line">num=num*<span class="number">2</span>;</span><br><span class="line"><span class="comment">//O(1)的算法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>平方阶O(n^2):</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">    for(int j=i;j++)&#123;</span><br><span class="line">    //O(1)的算法</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j++)&#123;</span><br><span class="line">    <span class="comment">//O(1)的算法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>常用的时间复杂度按照耗费的时间从小到大依次是：</li>
 </ul>
