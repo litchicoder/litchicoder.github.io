@@ -11,15 +11,15 @@
   <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
   
   
-    <meta name="keywords" content="">
+    <meta name="keywords" content="JAVA基础,">
   
 
   
-    <meta name="description" content="litchi,litchi blog">
+    <meta name="description" content="JAVA基础">
   
   
   <link rel="icon" type="image/x-icon" href="/logo.png">
-  <title>archives: 5/2020: 2020 [ litchi ]</title>
+  <title>final、finally和finalize [ litchi ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -46,7 +46,7 @@
           
       
           
-            <li class="pure-menu-item actived"><a href="/archives" class="pure-menu-link">归档</a></li>
+            <li class="pure-menu-item"><a href="/archives" class="pure-menu-link">归档</a></li>
           
       
           
@@ -68,217 +68,77 @@
 
   <div class="container" id="content-outer">
     <div class="inner" id="content-inner">
-      
+      <div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">
+        final、finally和finalize
+      </h1>
+      <span>
+        
+        <time class="time" datetime="2020-05-19T03:59:33.000Z">
+        2020-05-19
+      </time>
+        
+      </span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+      <span class="post-tags">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA基础/">JAVA基础</a></li></ul>
+      </span>
+    </span>
+      <span class="slash">/</span>
+      <span class="read">
+      <span id="busuanzi_value_page_pv"></span> 点击
+    </span>
+      <span class="slash">/</span>
+    </header>
 
-  
-  
+    <div class="post-content">
+      <ul>
+<li>final可以修饰类、方法和变量。修饰类代表这个类不可被继承。修饰方法表示该方法不可被重写。修饰变量表示该变量在赋值后不可改变。  </li>
+<li>finally保证重点代码一定会被执行的一种机制。通常使用组合try-catch-finally。  </li>
+<li>finalize是Object类的一个方法，当垃圾回收器将要回收对象所占内存之前被调用，这个方法来用保证来对象被回收前完成特定的资源回收。</li>
+</ul>
+
+    </div>
+
+    <div>全文完。</div>
+  </article>
+  <div class="toc-container">
     
-    
-    <section class="post page archives">
-      <h3 class="archive-year-wrap">
-        <a href="/archives/2020" class="archive-year">
-          2020
-        </a>
-      </h3>
-      <div class="archives">
+
+  </div>
+</div>
+<div class="copyright">
+    <span>本作品采用</span>
+    <a href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>
+    <span>进行许可。 转载时请注明原文链接。</span>
+</div>
+<div class="share" style="width: 100%;">
   
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/19/final、finally和finalize/">
-    <div>
-      <span class="date">
-        05-19
-      </span>
-      <span class="slash">/</span>
-      final、finally和finalize
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
 </div>
 
   
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/2020/05/15/线程间通信方式/" rel="next" title="线程间通信方式">
+          线程间通信方式
+          </a>
+        
+      </div>
   
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/15/线程间通信方式/">
-    <div>
-      <span class="date">
-        05-15
-      </span>
-      <span class="slash">/</span>
-      线程间通信方式
+      <div class="post-nav-item post-nav-prev">
+          
+      </div>
     </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
   
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/15/JAVA线程池的使用/">
-    <div>
-      <span class="date">
-        05-15
-      </span>
-      <span class="slash">/</span>
-      JAVA线程池的使用
-    </div>
 
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/13/关键字volatile和synchronized/">
-    <div>
-      <span class="date">
-        05-13
-      </span>
-      <span class="slash">/</span>
-      关键字volatile和synchronized
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/13/join方法/">
-    <div>
-      <span class="date">
-        05-13
-      </span>
-      <span class="slash">/</span>
-      join方法
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/12/sleep方法和wait方法/">
-    <div>
-      <span class="date">
-        05-12
-      </span>
-      <span class="slash">/</span>
-      “sleep方法和wait方法”
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/11/“死锁”/">
-    <div>
-      <span class="date">
-        05-11
-      </span>
-      <span class="slash">/</span>
-      “死锁”
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/09/HashMap原理/">
-    <div>
-      <span class="date">
-        05-09
-      </span>
-      <span class="slash">/</span>
-      HashMap原理
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/08/运行时数据区/">
-    <div>
-      <span class="date">
-        05-08
-      </span>
-      <span class="slash">/</span>
-      运行时数据区
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/07/关于作者/">
-    <div>
-      <span class="date">
-        05-07
-      </span>
-      <span class="slash">/</span>
-      关于作者
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-
-  </div></section>
 
     </div>
 
-    
-      <nav class="page-nav text-center">
-          <span class="page-number current">1</span><a class="page-number" href="/archives/2020/05/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/05/page/2/">〉</a>
-      </nav>
     
 
   </div>

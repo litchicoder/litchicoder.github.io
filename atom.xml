@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-05-16T10:44:23.995Z</updated>
+  <updated>2020-05-19T04:07:24.104Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>final、finally和finalize</title>
+    <link href="/2020/05/19/final%E3%80%81finally%E5%92%8Cfinalize/"/>
+    <id>/2020/05/19/final、finally和finalize/</id>
+    <published>2020-05-19T03:59:33.000Z</published>
+    <updated>2020-05-19T04:07:24.104Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>final可以修饰类、方法和变量。修饰类代表这个类不可被继承。修饰方法表示该方法不可被重写。修饰变量表示该变量在赋值后不可改变。  </li><li>finally保证重点代码一定会被执行的一种机制。通常使用组合try-catch-finally。  </li><li>finalize是Object类的一个方法，当垃圾回收器将要回收对象所占内存之前被调用，这个方法来用保证来对象被回收前完成特定的资源回收。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      JAVA基础
+    
+    </summary>
+    
+      <category term="JAVA基础" scheme="/categories/JAVA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="JAVA基础" scheme="/tags/JAVA%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>线程间通信方式</title>
@@ -487,33 +509,6 @@
       
       
         &lt;h4&gt;&lt;span id=&quot;线性表理解为将数据结点用一根线连接起来存储在物理空间线性表的数据元素一般具有相同的数据类型-大部分线性表中除了第一个元素没有前驱和最后一个元素没有后继其他元素都有前驱和后继也就是各元素之间是一对一的关系&quot;&gt;线性表理解为将数据结点用一根“线”连接起来存储
-      
-    
-    </summary>
-    
-      <category term="数据结构与算法" scheme="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="数据结构与算法" scheme="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>时间复杂度和空间复杂度</title>
-    <link href="/2020/04/07/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/"/>
-    <id>/2020/04/07/时间复杂度和空间复杂度/</id>
-    <published>2020-04-07T13:24:37.000Z</published>
-    <updated>2020-05-16T10:50:05.448Z</updated>
-    
-    <content type="html"><![CDATA[<p>时间复杂度：执行算法所需要的时间</p><p>空间复杂度：执行算法所需要的内存空间</p><p>时间复杂度的定义：一般情况下，算法中基本操作重复执行的次数是问题规模n的某个函数，用T(n)表示，若有某个辅助函数f(n)，使得T(n)/f(n)的极限值（当n趋近于无穷大时）为不等于零的常数，则称f(n)是T(n)的同数量级函数</p><ul><li>通常将O(1)、O(n)、O(logn)、O(n2)等分别叫做常量阶、线性阶、对数阶、平方阶等</li><li>推导大O阶方法：1.用常数1取代运行时间中的所有加法常数；2.修改后的运行次数函数中，值保留最高阶项；3.如果最高阶向存在且不是1，则去除与这个项相乘的常数</li><li>常数阶O(1)：</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum=<span class="number">0</span>，n=<span class="number">100</span>；</span><br><span class="line">sum=（<span class="number">1</span>+n）*n/<span class="number">2</span>;</span><br><span class="line">System.out.println(sum);</span><br></pre></td></tr></table></figure><ul><li>线性阶O(n):</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line"><span class="comment">//O(1)的算法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>对数阶O(logn):</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(num&lt;n)&#123;</span><br><span class="line">num=num*<span class="number">2</span>;</span><br><span class="line"><span class="comment">//O(1)的算法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>平方阶O(n^2):</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j++)&#123;</span><br><span class="line">    <span class="comment">//O(1)的算法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>常用的时间复杂度按照耗费的时间从小到大依次是：</li></ul><p><code>O(1)&lt;O(logn)&lt;O(n)&lt;O(nlogn)&lt;O(n²)&lt;O(n³)&lt;O(2ⁿ)&lt;O(n!)</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;时间复杂度：执行算法所需要的时间&lt;/p&gt;
-&lt;p&gt;空间复杂度：执行算法所需要的内存空间&lt;/p&gt;
-&lt;p&gt;时间复杂度的定义：一般情况下，算法中基本操作重复执行的次数是问题规模n的某个函数，用T(n)表示，若有某个辅助函数f(n)，使得T(n)/f(n)的极限值（当n趋近于无穷大时
       
     
     </summary>

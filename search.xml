@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>final、finally和finalize</title>
+      <link href="/2020/05/19/final%E3%80%81finally%E5%92%8Cfinalize/"/>
+      <url>/2020/05/19/final%E3%80%81finally%E5%92%8Cfinalize/</url>
+      
+        <content type="html"><![CDATA[<ul><li>final可以修饰类、方法和变量。修饰类代表这个类不可被继承。修饰方法表示该方法不可被重写。修饰变量表示该变量在赋值后不可改变。  </li><li>finally保证重点代码一定会被执行的一种机制。通常使用组合try-catch-finally。  </li><li>finalize是Object类的一个方法，当垃圾回收器将要回收对象所占内存之前被调用，这个方法来用保证来对象被回收前完成特定的资源回收。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> JAVA基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JAVA基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>线程间通信方式</title>
       <link href="/2020/05/15/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/"/>
       <url>/2020/05/15/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/</url>
