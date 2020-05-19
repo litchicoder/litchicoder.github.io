@@ -11,15 +11,15 @@
   <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
   
   
-    <meta name="keywords" content="JAVA基础,">
+    <meta name="keywords" content="设计模式,">
   
 
   
-    <meta name="description" content="JAVA基础">
+    <meta name="description" content="设计模式">
   
   
   <link rel="icon" type="image/x-icon" href="/logo.png">
-  <title>final、finally和finalize [ litchi ]</title>
+  <title>单例模式 [ litchi ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -72,11 +72,11 @@
   <article class="post" id="post">
     <header class="post-header text-center">
       <h1 class="title">
-        final、finally和finalize
+        单例模式
       </h1>
       <span>
         
-        <time class="time" datetime="2020-05-19T03:59:33.000Z">
+        <time class="time" datetime="2020-05-19T04:37:45.000Z">
         2020-05-19
       </time>
         
@@ -84,7 +84,7 @@
       <span class="slash">/</span>
       <span class="post-meta">
       <span class="post-tags">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA基础/">JAVA基础</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
       </span>
     </span>
       <span class="slash">/</span>
@@ -96,11 +96,25 @@
 
     <div class="post-content">
       <ul>
-<li>final可以修饰类、方法和变量。修饰类代表这个类不可被继承。修饰方法表示该方法不可被重写。修饰变量表示该变量在赋值后不可改变。  </li>
-<li>finally保证重点代码一定会被执行的一种机制。通常使用组合try-catch-finally。  </li>
-<li>finalize是Object类的一个方法，当垃圾回收器将要回收对象所占内存之前被调用，这个方法来用保证来对象被回收前完成特定的资源回收。</li>
+<li>懒汉式</li>
 </ul>
-
+<p>懒汉式是在调用时创建实例，用时间来换空间。  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LazySingleTon</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> LazySingleTon instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> LazySingleTon <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(LazySingleTon.class)&#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> LazySingleTon();</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>双重判断保证了原子性和可见性（synchronized），同时利用volatile来保证有序性，避免指令的重排。  </p>
+<ul>
+<li>饿汉式  </li>
+</ul>
+<p>饿汉式在类加载的时候就已经创建好对象，在使用时直接就可以拿到实例，标准的空间换时间。  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HungrySingleTon</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HungrySingleTon instance = <span class="keyword">new</span> HungrySingleTon();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HungrySingleTon <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>静态内部类实现  </li>
+</ul>
+<p>当外部类加载时不会导致内部类的立即加载，只有当getInstance方法被调用时才会去加载内部类，实现了加载。因为类的加载只会加载一次，所以它时线程安全的。  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticInnerSingleTon</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StaticInnerSingleTon</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleTonHolde</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> StaticInnerSingleTon instance = <span class="keyword">new</span> StaticInnerSingleTon();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StaticInnerSingleTon <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingleTonHolde.instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>枚举实现  </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> ESingleTon &#123;</span><br><span class="line">     single;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">singletonOperate</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"singletonOperate"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     <div>全文完。</div>
@@ -124,16 +138,16 @@
       <div class="post-nav-item post-nav-next">
         
           <span>〈 </span>
-          <a href="/2020/05/15/线程间通信方式/" rel="next" title="线程间通信方式">
-          线程间通信方式
+          <a href="/2020/05/19/final、finally和finalize/" rel="next" title="final、finally和finalize">
+          final、finally和finalize
           </a>
         
       </div>
   
       <div class="post-nav-item post-nav-prev">
           
-          <a href="/2020/05/19/单例模式/" rel="prev" title="单例模式">
-            单例模式
+          <a href="/2020/05/19/java引用类型/" rel="prev" title="java引用类型">
+            java引用类型
           </a>
           <span>〉</span>
         
