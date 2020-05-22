@@ -11,15 +11,15 @@
   <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
   
   
-    <meta name="keywords" content="">
+    <meta name="keywords" content="计算机网络,">
   
 
   
-    <meta name="description" content="litchi,litchi blog">
+    <meta name="description" content="计算机网络">
   
   
   <link rel="icon" type="image/x-icon" href="/logo.png">
-  <title>archives: 5/2020: 2020 [ litchi ]</title>
+  <title>OSI网络模型 [ litchi ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -46,7 +46,7 @@
           
       
           
-            <li class="pure-menu-item actived"><a href="/archives" class="pure-menu-link">归档</a></li>
+            <li class="pure-menu-item"><a href="/archives" class="pure-menu-link">归档</a></li>
           
       
           
@@ -68,217 +68,102 @@
 
   <div class="container" id="content-outer">
     <div class="inner" id="content-inner">
-      
+      <div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">
+        OSI网络模型
+      </h1>
+      <span>
+        
+        <time class="time" datetime="2020-05-22T09:11:03.000Z">
+        2020-05-22
+      </time>
+        
+      </span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+      <span class="post-tags">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+      </span>
+    </span>
+      <span class="slash">/</span>
+      <span class="read">
+      <span id="busuanzi_value_page_pv"></span> 点击
+    </span>
+      <span class="slash">/</span>
+    </header>
 
-  
-  
+    <div class="post-content">
+      <p><img src="osi.jpg" alt=""></p>
+<p>OSI（Open System Interconnection）全称开放系统互联，它把网络通信的工作分为7层，包括应用层、表现层、会话层、传输层、网络层、数据链路层和物理层。传输层、网络层、数据链路层和物理层叫做低四层，这四层和数据的移动相关。应用层、表现层和会话层叫做高三层，包含了应用程序级别的数据，每一层负责具体的一项工作将数据想向下一层传送。</p>
+<ul>
+<li>应用层</li>
+</ul>
+<p>应用层就是为了满足应用进程间的通信和交互任务。该层的协议有HTTP、HTTPS、FTP、POP3、SMTP等</p>
+<ul>
+<li>表现层</li>
+</ul>
+<p>表现层提供数据的编码和转换功能。数据的压缩和解压缩，加密和解密等工作都是在表现层完成。</p>
+<ul>
+<li>会话层</li>
+</ul>
+<p>会话层提供访问验证和会话管理在内的建立和维护应用间通信的机制，例如服务器验证用户登陆便由会话层完成。</p>
+<ul>
+<li>传输层</li>
+</ul>
+<p>传输层主要负责建立端到端的链接，传输层的作用是为上层协议提供端到端的可靠和透明的数据传输服务。<em>端口号即是这里的端，TCP和UDP就是这层的协议</em></p>
+<ul>
+<li>网络层</li>
+</ul>
+<p>网络层的任务是选择合适的网间路由和交换结点，确保数据及时传送。</p>
+<ul>
+<li>数据链路层</li>
+</ul>
+<p>将比特组合成字节,再将字节组合成帧,使用链路层地址 (以太网使用MAC地址)来访问介质,并进行差错检测（也就是帧编码和误差纠错的功能）。数据链路层协议又分为两个子层：逻辑链路控制（LLC）和媒体访问控制（MAC）。</p>
+<ul>
+<li>物理层</li>
+</ul>
+<p>信号的最终传输是通过物理层实现的。通过物理介质传输比特流。规定了电平、速度和电缆针脚。常用设备有（各种物理设备）集线器、中继器、调制解调器、网线、双绞线、同轴电缆。这些都是物理层的传输介质。</p>
+
+    </div>
+
+    <div>全文完。</div>
+  </article>
+  <div class="toc-container">
     
-    
-    <section class="post page archives">
-      <h3 class="archive-year-wrap">
-        <a href="/archives/2020" class="archive-year">
-          2020
-        </a>
-      </h3>
-      <div class="archives">
+
+  </div>
+</div>
+<div class="copyright">
+    <span>本作品采用</span>
+    <a href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>
+    <span>进行许可。 转载时请注明原文链接。</span>
+</div>
+<div class="share" style="width: 100%;">
   
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/22/OSI网络模型/">
-    <div>
-      <span class="date">
-        05-22
-      </span>
-      <span class="slash">/</span>
-      OSI网络模型
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
 </div>
 
   
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/2020/05/21/ArrayList和LinkedList/" rel="next" title="ArrayList和LinkedList">
+          ArrayList和LinkedList
+          </a>
+        
+      </div>
   
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/21/ArrayList和LinkedList/">
-    <div>
-      <span class="date">
-        05-21
-      </span>
-      <span class="slash">/</span>
-      ArrayList和LinkedList
+      <div class="post-nav-item post-nav-prev">
+          
+      </div>
     </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
   
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/19/java引用类型/">
-    <div>
-      <span class="date">
-        05-19
-      </span>
-      <span class="slash">/</span>
-      java引用类型
-    </div>
 
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/19/单例模式/">
-    <div>
-      <span class="date">
-        05-19
-      </span>
-      <span class="slash">/</span>
-      单例模式
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/19/final、finally和finalize/">
-    <div>
-      <span class="date">
-        05-19
-      </span>
-      <span class="slash">/</span>
-      final、finally和finalize
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/15/线程间通信方式/">
-    <div>
-      <span class="date">
-        05-15
-      </span>
-      <span class="slash">/</span>
-      线程间通信方式
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/15/JAVA线程池的使用/">
-    <div>
-      <span class="date">
-        05-15
-      </span>
-      <span class="slash">/</span>
-      JAVA线程池的使用
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/13/关键字volatile和synchronized/">
-    <div>
-      <span class="date">
-        05-13
-      </span>
-      <span class="slash">/</span>
-      关键字volatile和synchronized
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/13/join方法/">
-    <div>
-      <span class="date">
-        05-13
-      </span>
-      <span class="slash">/</span>
-      join方法
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/12/sleep方法和wait方法/">
-    <div>
-      <span class="date">
-        05-12
-      </span>
-      <span class="slash">/</span>
-      “sleep方法和wait方法”
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-
-  </div></section>
 
     </div>
 
-    
-      <nav class="page-nav text-center">
-          <span class="page-number current">1</span><a class="page-number" href="/archives/2020/05/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/05/page/2/">〉</a>
-      </nav>
     
 
   </div>
