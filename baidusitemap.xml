@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>/2020/05/23/HTTP%E3%80%81HTTPS%E5%92%8CHTTP2-0/</loc>
+    <lastmod>2020-05-24</lastmod>
+  </url>  <url>
+    <loc>/2020/02/05/%E9%9D%A2%E8%AF%95%E7%A7%AF%E7%B4%AF/</loc>
+    <lastmod>2020-05-24</lastmod>
+  </url>  <url>
     <loc>/2020/05/22/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/</loc>
     <lastmod>2020-05-22</lastmod>
   </url>  <url>
     <loc>/2020/05/22/OSI%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2020-05-22</lastmod>
-  </url>  <url>
-    <loc>/2020/02/05/%E9%9D%A2%E8%AF%95%E7%A7%AF%E7%B4%AF/</loc>
     <lastmod>2020-05-22</lastmod>
   </url>  <url>
     <loc>/2020/05/21/ArrayList%E5%92%8CLinkedList/</loc>
