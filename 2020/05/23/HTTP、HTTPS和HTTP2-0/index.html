@@ -127,6 +127,15 @@
 <blockquote>
 <p>将公钥放在数字证书中。只要证书是可信的，公钥就是可信的。</p>
 </blockquote>
+<p>什么是对称加密？</p>
+<blockquote>
+<p>加密和解密用的都是相同的密钥，优点是速度快，缺点是安全性低，常见的对称加密DES、AES等</p>
+</blockquote>
+<p>什么是非对称加密？</p>
+<blockquote>
+<p>非对称加密由一对密钥对，分为公钥和私钥。一般私钥自己持有，公钥可以公开给对方，优点是安全性比对称密钥高，缺点是数据传输效率比对称密钥低。采用公钥加密的数据只能由对应的私钥来解密。常见的非对称加密算法RSA。</p>
+</blockquote>
+<p><em>HTTPS在传输过程中采用了对称加密和非对称加密结合使用，使用非对称加密传递密钥，然后使用对称密钥进行数据传输的加密和解密。二者的结合既保证了传输的安全性，也保证了数据传输的效率</em></p>
 <h3><span id="http-20">* HTTP 2.0</span></h3><ol>
 <li>（二进制格式）HTTP 2.0采用二进制格式传输，而HTTP1.x使用纯文本的形式传输数据</li>
 <li>（Header压缩）HTTP 2.0对已经发送的Header使用键值对建立索引表（两端维护的索引表），相同的Header使用索引表示，即Header压缩。</li>
@@ -170,6 +179,11 @@
   
       <div class="post-nav-item post-nav-prev">
           
+          <a href="/2020/05/25/TCP和UDP/" rel="prev" title="TCP和UDP">
+            TCP和UDP
+          </a>
+          <span>〉</span>
+        
       </div>
     </div>
   

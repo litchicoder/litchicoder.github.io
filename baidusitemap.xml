@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>/2020/05/25/TCP%E5%92%8CUDP/</loc>
+    <lastmod>2020-05-25</lastmod>
+  </url>  <url>
     <loc>/2020/05/23/HTTP%E3%80%81HTTPS%E5%92%8CHTTP2-0/</loc>
-    <lastmod>2020-05-24</lastmod>
+    <lastmod>2020-05-25</lastmod>
   </url>  <url>
     <loc>/2020/02/05/%E9%9D%A2%E8%AF%95%E7%A7%AF%E7%B4%AF/</loc>
     <lastmod>2020-05-24</lastmod>

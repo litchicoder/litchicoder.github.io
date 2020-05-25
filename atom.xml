@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-05-24T15:18:42.646Z</updated>
+  <updated>2020-05-25T14:35:50.210Z</updated>
   <id>/</id>
   
   <author>
@@ -17,13 +17,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>TCP和UDP</title>
+    <link href="/2020/05/25/TCP%E5%92%8CUDP/"/>
+    <id>/2020/05/25/TCP和UDP/</id>
+    <published>2020-05-25T09:18:41.000Z</published>
+    <updated>2020-05-25T14:35:50.210Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>TCP（（Transmission Control Protocol，传输控制协议））</li></ul><p>TCP协议是面向连接、可靠的字节流传输服务。TCP协议在C/S间数据交换前，需要先在上方建立一个TCP连接，之后才开始传输数据，并提供超时、重发、丢弃重复数据、数据校验和流量控制等功能。<br>特点：<em>面向连接、可靠通信、面向字节流</em><br>应用层协议：HTTP、HTTPS、SSH、FTP、SMTP</p><ul><li>UDP（User Data Protocol，用户数据报协议）</li></ul><p>UDP是一个面向数据报的传输层协议，不具有可靠性，只是把数据发出去，不保证数据是否能到达S端。因为UDP在传输数据前不需要建立一个连接，所以它的传输效率很快，不能保证数据的可靠。<br>特点：<em>无连接、不可靠、面向数据报</em><br>应用层协议：DHCP、DNS</p><ul><li>TCP协议建立连接的三次握手</li></ul><p><img src="tcp_create_connection.jpg" alt=""></p><p><em>第一次握手</em>（请求建立连接）C端发送建立连接请求，携带序列号seq=x 标示SYN=1，此时C端处于SYN_SEND状态；<br><em>第二次握手</em>（确认请求）S端收到后，发出确认信息，确认信息ACK=x+1，同时携带自己的序列号SYN=1，seq=y；<br><em>第三次握手</em>（建立连接）C端收到S端的确认请求后，向S端发送确认ACK=y+1，S端收到请求后两端都处于Established状态，表示当前的一次TCP连接成功。</p><ul><li>TCP断开连接的四次挥手</li></ul><p><img src="tcp_finish_connection.jpg" alt=""></p><p><em>第一次挥手</em>（请求释放）C端发送释放连接的请求信号FIN=1，seq=u，此时C端处于FIN WAIT状态,不再发送数据给S端；<br><em>第二次挥手</em>（确认请求）S端收到释放请求后，发送确认收到请求释放，ACK=1,ack=u+1,此时S度啊处于CLOSE EAIT状态，不再接收C端数据，但是需要发送给C端的数据可继续发送；<br><em>第三次挥手</em>（确认释放）当S端不再有数据需要发送给C端时，发送却是释放连接，携带FIN=1，seq=w，ACK=1，ack=u+1，此时S端处于LAST ACK状态，等待C端的最终确认；<br><em>第四次挥手</em>（最终释放确认）当C端收到了确认释放后，随即发送最终释放确认，ACK=1，ack=w+1，seq=u+1；此时C端在等待2MSL后关闭连接，S端收到请求后同样关闭。</p><ul><li><p>为什么需要三次握手？<br>如果是两次握手，服务端确认请求后，不知道客户端是否能收到了消息，服务端的消息得不到确认。(服务端消息等不到确认)<br>如果客户端发送的请求网络延迟了，超时后有客户端重新发起请求，倘若在重发请求正常进行完毕后，再收到之前网络拥塞的请求，再和服务端建立连接，这个时候就可能服务端一直等待，导致服务端连接资源浪费。  </p></li><li><p>为什么第三次握手是seq=x+1，而不是x+2？<br>从握手的规律可以看出来seq在确认请求中会变做确认表示即ack，ack会在seq值的基础上加1，<em>同时TCP规定，SYN不携带数据，但会消耗掉一个序列号，SYN=1时会消耗seq的一个值（即加1），第三次握手ACK=1、SYN不等于1，而ACK=1不消耗seq所以seq=x+1而不是x+2，挥手中FIN也和SYN一样</em></p></li><li><p>TCP建立连接后客户端出现故障会怎样？<br>服务端有个计数器，一般两小时，两小时如果没有收到任何数据，会发送探测报文段，发了几个报文段如果还是没反应，服务端就会关闭连接。</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      计算机网络
+    
+    </summary>
+    
+      <category term="计算机网络" scheme="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="计算机网络" scheme="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HTTP、HTTPS和HTTP2.0</title>
     <link href="/2020/05/23/HTTP%E3%80%81HTTPS%E5%92%8CHTTP2-0/"/>
     <id>/2020/05/23/HTTP、HTTPS和HTTP2-0/</id>
     <published>2020-05-23T10:14:51.000Z</published>
-    <updated>2020-05-24T15:18:42.646Z</updated>
+    <updated>2020-05-25T09:18:10.142Z</updated>
     
-    <content type="html"><![CDATA[<h3><span id="什么是http">* 什么是HTTP</span></h3><p>HTTP（HyperText Transfer Protocol）中文全名超文本传输协议，HTTP是用于客户端与服务器间请求响应的协议。HTTP是应用层的协议，和其他该层协议一样，它是服务于某一类具体应用的协议。</p><h3><span id="什么是httpshyper-text-transfer-protocol-over-securesocket-layer">* 什么是HTTPS（Hyper Text Transfer Protocol over SecureSocket Layer）</span></h3><p>HTTPS是在HTTP的基础上加上了SSL/TLS层<br>TLS（Transport Layer Security，传输层安全协议）、SSL(Secure Sockets Layer 安全套接层)</p><p>SSL由NetScape公司设计，共有三个版本1、2、3。SSL 3.0得到大规模使用，而TLS是SSL标准化后的升级版</p><p>SSL/TLS握手阶段工作流程：  </p><p><img src="https.jpg" alt=""></p><ol><li><p>客户端向服务端发出加密通信请求(ClientHello)</p><blockquote><p>携带支持的协议，例如TLS 1.0版<br>客户端生成的随机数random1，后面用于生成“对话密钥”<br>支持的加密方法，比如RSA公钥加密<br>支持的压缩的方法  </p></blockquote></li><li><p>服务端收到请求，做出响应(ServerHello)</p><blockquote><p>确认加密通信协议，例如TLS 1.0版。如果协议与服务端支持的不一致，则关闭加密通信。<br>服务端生成一个随机数random2，后面用于生成“对话密钥”<br>确认加密方法，例如RSA公钥加密<br>携带服务端证书给客户端  </p></blockquote></li><li><p>客服端做证书验证和公钥对随机数加密发送给服务端(ClientResponse)</p><blockquote><p>验证证书的安全性<br>验证通过后，客户端生成随机数pre-master secret，然后使用证书中的公钥进行加密，发送给服务端  </p></blockquote></li><li><p>服务端私钥解密获得随机数(ServerResponse)</p><blockquote><p>服务端收到公钥加密的内容，在服务端使用私钥解密后得到pre-master secret，然后根据random1、random2和pre-master secret通过一定的算法得出对称加密的秘钥，作为后面交互过程中的对称密钥。同时客户端也使用random1、random2和pre-master secret，同样的算法生成对称密钥。  </p></blockquote></li><li>后续操作使用上一步生成的对称密钥对传输的内容加密和解密。</li></ol><p>如何保证公钥不被篡改？</p><blockquote><p>将公钥放在数字证书中。只要证书是可信的，公钥就是可信的。</p></blockquote><h3><span id="http-20">* HTTP 2.0</span></h3><ol><li>（二进制格式）HTTP 2.0采用二进制格式传输，而HTTP1.x使用纯文本的形式传输数据</li><li>（Header压缩）HTTP 2.0对已经发送的Header使用键值对建立索引表（两端维护的索引表），相同的Header使用索引表示，即Header压缩。</li><li>（服务器推送）服务端可以进行主动推送  </li><li>（多路复用）一个TCP连接被划分为多个流，客户端借助流和服务端建立全双工通信，且流具有优先级。</li></ol>]]></content>
+    <content type="html"><![CDATA[<h3><span id="什么是http">* 什么是HTTP</span></h3><p>HTTP（HyperText Transfer Protocol）中文全名超文本传输协议，HTTP是用于客户端与服务器间请求响应的协议。HTTP是应用层的协议，和其他该层协议一样，它是服务于某一类具体应用的协议。</p><h3><span id="什么是httpshyper-text-transfer-protocol-over-securesocket-layer">* 什么是HTTPS（Hyper Text Transfer Protocol over SecureSocket Layer）</span></h3><p>HTTPS是在HTTP的基础上加上了SSL/TLS层<br>TLS（Transport Layer Security，传输层安全协议）、SSL(Secure Sockets Layer 安全套接层)</p><p>SSL由NetScape公司设计，共有三个版本1、2、3。SSL 3.0得到大规模使用，而TLS是SSL标准化后的升级版</p><p>SSL/TLS握手阶段工作流程：  </p><p><img src="https.jpg" alt=""></p><ol><li><p>客户端向服务端发出加密通信请求(ClientHello)</p><blockquote><p>携带支持的协议，例如TLS 1.0版<br>客户端生成的随机数random1，后面用于生成“对话密钥”<br>支持的加密方法，比如RSA公钥加密<br>支持的压缩的方法  </p></blockquote></li><li><p>服务端收到请求，做出响应(ServerHello)</p><blockquote><p>确认加密通信协议，例如TLS 1.0版。如果协议与服务端支持的不一致，则关闭加密通信。<br>服务端生成一个随机数random2，后面用于生成“对话密钥”<br>确认加密方法，例如RSA公钥加密<br>携带服务端证书给客户端  </p></blockquote></li><li><p>客服端做证书验证和公钥对随机数加密发送给服务端(ClientResponse)</p><blockquote><p>验证证书的安全性<br>验证通过后，客户端生成随机数pre-master secret，然后使用证书中的公钥进行加密，发送给服务端  </p></blockquote></li><li><p>服务端私钥解密获得随机数(ServerResponse)</p><blockquote><p>服务端收到公钥加密的内容，在服务端使用私钥解密后得到pre-master secret，然后根据random1、random2和pre-master secret通过一定的算法得出对称加密的秘钥，作为后面交互过程中的对称密钥。同时客户端也使用random1、random2和pre-master secret，同样的算法生成对称密钥。  </p></blockquote></li><li>后续操作使用上一步生成的对称密钥对传输的内容加密和解密。</li></ol><p>如何保证公钥不被篡改？</p><blockquote><p>将公钥放在数字证书中。只要证书是可信的，公钥就是可信的。</p></blockquote><p>什么是对称加密？</p><blockquote><p>加密和解密用的都是相同的密钥，优点是速度快，缺点是安全性低，常见的对称加密DES、AES等</p></blockquote><p>什么是非对称加密？</p><blockquote><p>非对称加密由一对密钥对，分为公钥和私钥。一般私钥自己持有，公钥可以公开给对方，优点是安全性比对称密钥高，缺点是数据传输效率比对称密钥低。采用公钥加密的数据只能由对应的私钥来解密。常见的非对称加密算法RSA。</p></blockquote><p><em>HTTPS在传输过程中采用了对称加密和非对称加密结合使用，使用非对称加密传递密钥，然后使用对称密钥进行数据传输的加密和解密。二者的结合既保证了传输的安全性，也保证了数据传输的效率</em></p><h3><span id="http-20">* HTTP 2.0</span></h3><ol><li>（二进制格式）HTTP 2.0采用二进制格式传输，而HTTP1.x使用纯文本的形式传输数据</li><li>（Header压缩）HTTP 2.0对已经发送的Header使用键值对建立索引表（两端维护的索引表），相同的Header使用索引表示，即Header压缩。</li><li>（服务器推送）服务端可以进行主动推送  </li><li>（多路复用）一个TCP连接被划分为多个流，客户端借助流和服务端建立全双工通信，且流具有优先级。</li></ol>]]></content>
     
     <summary type="html">
     
@@ -454,40 +476,6 @@
     
     
       <category term="JVM" scheme="/tags/JVM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>查找算法</title>
-    <link href="/2020/04/21/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/"/>
-    <id>/2020/04/21/查找算法/</id>
-    <published>2020-04-21T07:00:09.000Z</published>
-    <updated>2020-05-07T11:06:18.364Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>插值查找</li><li>黄金分割法</li><li>线性索引查找</li><li>二叉排序树</li><li>平衡二叉树</li><li>B树</li><li>散列表（哈希表）查找<br>*</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;插值查找&lt;/li&gt;
-&lt;li&gt;黄金分割法&lt;/li&gt;
-&lt;li&gt;线性索引查找&lt;/li&gt;
-&lt;li&gt;二叉排序树&lt;/li&gt;
-&lt;li&gt;平衡二叉树&lt;/li&gt;
-&lt;li&gt;B树&lt;/li&gt;
-&lt;li&gt;散列表（哈希表）查找&lt;br&gt;*&lt;/li&gt;
-&lt;/ul&gt;
-
-      
-    
-    </summary>
-    
-      <category term="数据结构与算法" scheme="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="数据结构与算法" scheme="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
