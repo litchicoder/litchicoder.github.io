@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Android动画分类</title>
+      <link href="/2020/05/26/Android%E5%8A%A8%E7%94%BB%E5%88%86%E7%B1%BB/"/>
+      <url>/2020/05/26/Android%E5%8A%A8%E7%94%BB%E5%88%86%E7%B1%BB/</url>
+      
+        <content type="html"><![CDATA[<ul><li>帧动画<br>通过在xml中的一组图片的播放来实现。</li><li>补间动画<br>分为旋转、移动、缩放、透明度四类动画，以及他们的组合来实现动画效果。  </li><li><p>属性动画<br>属性动画目前使用场景最多，分类两种ViewPropertyAnimator和ObjectAnimator。前者是通用的动画，例如旋转、透明度、位移和缩放,简单通过View.animator()就可得到ViewPropertyAnimator。后者通过ObjectAnimator.of属性()来返回一个ObjectAnimator，ObjectAnimator需要重绘View所以要调用invalidate()来刷新绘制，最后通过start()方法启动动画。  </p></li><li><p>补间动画和属性动画的区别？</p></li></ul><p>补间动画只是在父VIew层刘永Matrix不多绘制View，达到移动的效果，其实View并没有发生变化，还在动画之前的位置。<br>属性动画是真正改变了View的属性值，真正的改变View的具体属性值的。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Android基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>TCP和UDP</title>
       <link href="/2020/05/25/TCP%E5%92%8CUDP/"/>
       <url>/2020/05/25/TCP%E5%92%8CUDP/</url>
@@ -696,7 +721,7 @@
       <link href="/2020/02/05/%E9%9D%A2%E8%AF%95%E7%A7%AF%E7%B4%AF/"/>
       <url>/2020/02/05/%E9%9D%A2%E8%AF%95%E7%A7%AF%E7%B4%AF/</url>
       
-        <content type="html"><![CDATA[<h2><span id="要求">要求：</span></h2><ul><li>薪酬结构</li><li>五险一金（全额，非全额要在基础薪资上调整）</li><li>技术团队规模</li><li>上下班时间 单双休 加班情况</li><li>人员配置 发版频率</li><li>绩效 年终奖</li><li>其他福利 餐补 车补贴 房补贴</li></ul><h2><span id="项目经验">项目经验：</span></h2><p>遇到了什么困难怎么解决的</p><ol><li>直播</li></ol><p>做了两方面的隔离，一是与其他业务模块的解耦 利用中间控制层 直播模块提供出对其他业务场景的依赖需求 其他业务模块提供这些能力给直播；二是把直播内部分为业务表现层和三方依赖层  具体做法是把三方直播依赖沉淀到baseview 把业务层需要的能力通过统一能力管理输出 （主要是直播画面能力控制和自定义消息协议的控制）</p><ol start="2"><li><p>首页</p></li><li><p>动画控件</p></li></ol><p>级联view<br>tab</p><h2><span id="java基础">java基础：</span></h2><ol><li><p>同步锁<br>同步锁的原理：</p></li><li><p>线程和进程</p></li></ol><ol start="4"><li><p>位运算<br>常见十进制D、二进制B、八进制Q和十六进制H（逢几进1）n<br>十进制向n进制转化：十进制转化为n进制时 十进制数一直除以n得余数 到一直不能整除为止，小数点部分是将小数部分乘以n 取整 然后小数部分继续乘以n 取整部分倒叙排序就是小数部分的值<br>二进制转n进制：采用r（二进制和n进制之间的位数差 例如八进制是3合1、十六进制时4合1，如果是32进制就是 5合1）合1的方式，如果位数不够r位，整数部分向左补零，小数部分向右补零，然后按照案权展开相加即可得</p></li><li><p>线程安全</p></li></ol><ol start="6"><li><p>进程保活</p></li><li><p>HashMap原理</p></li></ol><h2><span id="数据结构与算法">数据结构与算法：</span></h2><ol><li>时间复杂度、空间复杂度</li><li></li></ol><h2><span id="网络">网络：</span></h2><ol><li><p>tcp的三次握手和四次挥手：<br>第一次：c端发送连接请求 序列号seq=x SYN创建连接状态<br>第二次：b端收到信息后 发送确认码ack=x+1 SYN=1<br>第三次：c端收到后</p></li><li><p>http2.0</p></li><li>Android下网络优化方案</li><li>QUIC协议</li><li><h2><span id="android基础">Android基础：</span></h2>android sdk<br>JNI framework<br>安卓系统架构<br>安全机制<br>Java内存管理</li></ol><h2><span id="三方库">三方库：</span></h2><ol><li><p>eventbus原理<br>利用反射触发事件函数的执行<br>关键的一个键值对来存储数据 key是eventType（传递的时事件类型）<br>线程模式 posting：处理函数看post在线程就在什么线程执行<br>main：处理函数在主线程执行<br>background：处理函数在子线程 post如果在主线程辉创建子线程 如果在子线程就直接在子线程触发处理<br>async：新建子线程触发处理函数的执行</p></li><li><p>butterknife原理</p></li><li>okhttp</li><li>rxjava</li><li>retrofit</li><li>Glide Fresco 三级缓冲</li></ol><h2><span id="其他">其他：</span></h2><p>对称加密和非对称加密</p>]]></content>
+        <content type="html"><![CDATA[<h2><span id="要求">要求：</span></h2><ul><li>薪酬结构</li><li>五险一金（全额，非全额要在基础薪资上调整）</li><li>技术团队规模</li><li>上下班时间 单双休 加班情况</li><li>人员配置 发版频率</li><li>绩效 年终奖</li><li>其他福利 餐补 车补贴 房补贴</li></ul><h2><span id="项目经验">项目经验：</span></h2><p>遇到了什么困难怎么解决的</p><ol><li>直播</li></ol><p>做了两方面的隔离，一是与其他业务模块的解耦 利用中间控制层 直播模块提供出对其他业务场景的依赖需求 其他业务模块提供这些能力给直播；二是把直播内部分为业务表现层和三方依赖层  具体做法是把三方直播依赖沉淀到baseview 把业务层需要的能力通过统一能力管理输出 （主要是直播画面能力控制和自定义消息协议的控制）</p><ol start="2"><li><p>首页</p></li><li><p>动画控件</p></li></ol><p>级联view<br>tab</p><h2><span id="java基础">java基础：</span></h2><ol><li><p>同步锁<br>同步锁的原理：</p></li><li><p>线程和进程</p></li></ol><ol start="4"><li><p>位运算<br>常见十进制D、二进制B、八进制Q和十六进制H（逢几进1）n<br>十进制向n进制转化：十进制转化为n进制时 十进制数一直除以n得余数 到一直不能整除为止，小数点部分是将小数部分乘以n 取整 然后小数部分继续乘以n 取整部分倒叙排序就是小数部分的值<br>二进制转n进制：采用r（二进制和n进制之间的位数差 例如八进制是3合1、十六进制时4合1，如果是32进制就是 5合1）合1的方式，如果位数不够r位，整数部分向左补零，小数部分向右补零，然后按照案权展开相加即可得</p></li><li><p>线程安全</p></li></ol><ol start="6"><li><p>进程保活</p></li><li><p>HashMap原理</p></li><li>HashTable</li></ol><h2><span id="数据结构与算法">数据结构与算法：</span></h2><ol><li>时间复杂度、空间复杂度</li><li></li></ol><h2><span id="网络">网络：</span></h2><ol><li><p>tcp的三次握手和四次挥手：<br>第一次：c端发送连接请求 序列号seq=x SYN创建连接状态<br>第二次：b端收到信息后 发送确认码ack=x+1 SYN=1<br>第三次：c端收到后</p></li><li><p>http2.0</p></li><li>Android下网络优化方案</li><li>QUIC协议</li><li><h2><span id="android基础">Android基础：</span></h2>android sdk<br>JNI framework<br>安卓系统架构<br>安全机制<br>Java内存管理</li></ol><h2><span id="三方库">三方库：</span></h2><ol><li><p>eventbus原理<br>利用反射触发事件函数的执行<br>关键的一个键值对来存储数据 key是eventType（传递的时事件类型）<br>线程模式 posting：处理函数看post在线程就在什么线程执行<br>main：处理函数在主线程执行<br>background：处理函数在子线程 post如果在主线程辉创建子线程 如果在子线程就直接在子线程触发处理<br>async：新建子线程触发处理函数的执行</p></li><li><p>butterknife原理</p></li><li>okhttp</li><li>rxjava</li><li>retrofit</li><li>Glide Fresco 三级缓冲</li></ol><h2><span id="其他">其他：</span></h2><p>对称加密和非对称加密</p>]]></content>
       
       
       
