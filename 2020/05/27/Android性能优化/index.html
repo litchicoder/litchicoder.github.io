@@ -15,11 +15,11 @@
   
 
   
-    <meta name="description" content="litchi,litchi blog">
+    <meta name="description" content="Android性能优化">
   
   
   <link rel="icon" type="image/x-icon" href="/logo.png">
-  <title>archives: 2020 [ litchi ]</title>
+  <title>Android性能优化 [ litchi ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -46,7 +46,7 @@
           
       
           
-            <li class="pure-menu-item actived"><a href="/archives" class="pure-menu-link">归档</a></li>
+            <li class="pure-menu-item"><a href="/archives" class="pure-menu-link">归档</a></li>
           
       
           
@@ -68,217 +68,128 @@
 
   <div class="container" id="content-outer">
     <div class="inner" id="content-inner">
-      
+      <div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">
+        Android性能优化
+      </h1>
+      <span>
+        
+        <time class="time" datetime="2020-05-27T05:01:02.000Z">
+        2020-05-27
+      </time>
+        
+      </span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+      <span class="post-tags">
+        
+      </span>
+    </span>
+      <span class="slash">/</span>
+      <span class="read">
+      <span id="busuanzi_value_page_pv"></span> 点击
+    </span>
+      <span class="slash">/</span>
+    </header>
 
-  
-  
+    <div class="post-content">
+      <p>Android的性能优化主要从四方面入手，内存优化、布局优化、网络优化和安装包优化。  </p>
+<ul>
+<li><p>常用检查工具<br><em>LeakCanary</em>是一个三方检测内存泄漏的工具库 ，集成后会自动检测应用运行期间的内存泄漏，并直观的输出。<br>Android自带的<em>Android Profiler</em> ，可以检测CPU、MEMERY、NETWORK三方的性能。<br><em>BlockCanary</em>是一个三方用来检测UI卡顿的工具库，像LeakCanary一样集成后当发生UI卡顿现象时会输出卡顿的信息，通过输出的信息可以很方便的来定位导致卡顿的原因。</p>
+</li>
+<li><p>内存优化<br>内存优化的方式时避免内存泄漏（节流）、增加内存（开源）。<br>常见的内存泄露：</p>
+</li>
+</ul>
+<ol>
+<li>单例导致的泄漏。在创建单例时传入了具体页面的Context，由于单例的静态属性，导致单例一致持有该Context引用，一直到应用程序结束。正确的做法是创建单例时应用传入应用级别的Context，也就是Application的Context，这样就保证了单例生命周期与传入Context的统一。  </li>
+<li>静态变量导致的内存泄漏。JVM中可以知道静态变量是在方法区的，它的生命周期是从类加载到应用程序结束，如果静态变量中持有了具体页面的Context就会导致页面finish后Context不会被GC，这样就导致了内存泄露。  </li>
+<li>非静态内部类导致的内存泄露。非静态内部类创建呢的Handle或Thread在执行延时操作时一直持有当前的Activity引用，这时候在Activity finish后就会导致内存泄漏。解决方式是使用静态内部类并用弱引用调用Activity；另外还可以在onDestroy中调用handler.removeCallbacksAndMessages取消所有事件消息。  </li>
+<li>使用资源没有及时关闭。常见操作有：数据流操作完没有关闭、bitmap没及时Recycle等</li>
+<li>三方的没及时接绑。EventBus（unregister）和Rxjava中（dispose）。  </li>
+<li>动画执行导致的。在Activity finish时动画执行还在进行。解决就是在onDestroy时cacel动画。  </li>
+<li>WebView导致的泄漏。 WebView即使调用了destroy也会导致内存泄漏。解决方式时使用弱引用WeekReference或者将WebView所在的Activity置于另外一个进程中。</li>
+</ol>
+<p>增加内存方案一般会在Application下添加largeHeap=”true”，活着新开进程来时应用的内存总空间增大。</p>
+<ul>
+<li>布局优化  16ms</li>
+</ul>
+<ol>
+<li>使用RelativeLayout减少View层级</li>
+<li>利用<include>抽离常用的布局</include></li>
+<li>使用<viewstub>加载不常用的布局</viewstub></li>
+<li>使用<merge>减少布局嵌套</merge></li>
+<li>减少多余的背景绘制</li>
+<li>canvas.clipRect()裁剪可见区域，其他区域就不会被多余绘制。</li>
+</ol>
+<ul>
+<li>网络优化  </li>
+</ul>
+<ol>
+<li>合理合并网络请求</li>
+<li>网络缓存</li>
+<li>大数据分页请求</li>
+<li>网络数据传输压缩（Gzip）</li>
+<li>图片压缩、缩略图</li>
+</ol>
+<ul>
+<li>安装包优化<br>apk的构成：</li>
+</ul>
+<ol>
+<li>assets文件夹：配置文件、资源文件 文件夹内的资源时通过AssetManager类内方法获取。  </li>
+<li>res：资源文件，文件名会自动生成对应ID映射到.R文件中。  </li>
+<li>META-INF：保存呢应用的签名信息，保证APK的完整性。  </li>
+<li>AndroidManifest.xml：描述应用的配置信息。  </li>
+<li>classes.dex：Dalvik虚拟机可执行的字节码文件，SDK下dx工具将JAVA字节码转化为Dalvik字节码。  </li>
+<li>resources.arsc：资源文件和资源ID间的映射关系。  </li>
+</ol>
+<p>根据spk的构成做一下几方面的优化：  </p>
+<ol>
+<li>混淆：使用proGuard代码混淆工具，它包含了代码的压缩、优化、混淆等功能。  </li>
+<li>资源优化：利用lint工具删除冗余代码，资源文件的最小化等。  </li>
+<li>重复功能库：去除一些功能重复库的引用。  </li>
+<li>插件化：功能模块放在服务器上，按需下载。<br>5.so库优化：保留v7版本，删除armeabi和v8版本的SO库，v7库可以按足市场上绝大多树手机的要求。</li>
+</ol>
+
+    </div>
+
+    <div>全文完。</div>
+  </article>
+  <div class="toc-container">
     
-    
-    <section class="post page archives">
-      <h3 class="archive-year-wrap">
-        <a href="/archives/2020" class="archive-year">
-          2020
-        </a>
-      </h3>
-      <div class="archives">
+
+  </div>
+</div>
+<div class="copyright">
+    <span>本作品采用</span>
+    <a href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>
+    <span>进行许可。 转载时请注明原文链接。</span>
+</div>
+<div class="share" style="width: 100%;">
   
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/27/Android性能优化/">
-    <div>
-      <span class="date">
-        05-27
-      </span>
-      <span class="slash">/</span>
-      Android性能优化
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
 </div>
 
   
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/2020/05/26/Android动画分类/" rel="next" title="Android动画分类">
+          Android动画分类
+          </a>
+        
+      </div>
   
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/26/Android动画分类/">
-    <div>
-      <span class="date">
-        05-26
-      </span>
-      <span class="slash">/</span>
-      Android动画分类
+      <div class="post-nav-item post-nav-prev">
+          
+      </div>
     </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
   
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/25/TCP和UDP/">
-    <div>
-      <span class="date">
-        05-25
-      </span>
-      <span class="slash">/</span>
-      TCP和UDP
-    </div>
 
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/23/HTTP、HTTPS和HTTP2-0/">
-    <div>
-      <span class="date">
-        05-23
-      </span>
-      <span class="slash">/</span>
-      HTTP、HTTPS和HTTP2.0
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/22/HTTP状态码/">
-    <div>
-      <span class="date">
-        05-22
-      </span>
-      <span class="slash">/</span>
-      HTTP状态码
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/22/OSI网络模型/">
-    <div>
-      <span class="date">
-        05-22
-      </span>
-      <span class="slash">/</span>
-      OSI网络模型
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/21/ArrayList和LinkedList/">
-    <div>
-      <span class="date">
-        05-21
-      </span>
-      <span class="slash">/</span>
-      ArrayList和LinkedList
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/19/java引用类型/">
-    <div>
-      <span class="date">
-        05-19
-      </span>
-      <span class="slash">/</span>
-      java引用类型
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/19/单例模式/">
-    <div>
-      <span class="date">
-        05-19
-      </span>
-      <span class="slash">/</span>
-      单例模式
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/19/final、finally和finalize/">
-    <div>
-      <span class="date">
-        05-19
-      </span>
-      <span class="slash">/</span>
-      final、finally和finalize
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-
-  </div></section>
 
     </div>
 
-    
-      <nav class="page-nav text-center">
-          <span class="page-number current">1</span><a class="page-number" href="/archives/2020/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/4/">4</a><a class="extend next" rel="next" href="/archives/2020/page/2/">〉</a>
-      </nav>
     
 
   </div>
