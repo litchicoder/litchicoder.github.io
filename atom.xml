@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-05-30T15:17:41.075Z</updated>
+  <updated>2020-05-30T15:19:51.691Z</updated>
   <id>/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="/2020/05/30/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8DOOM/"/>
     <id>/2020/05/30/图片加载如何避免OOM/</id>
     <published>2020-05-30T14:47:26.000Z</published>
-    <updated>2020-05-30T15:17:41.075Z</updated>
+    <updated>2020-05-30T15:19:51.691Z</updated>
     
-    <content type="html"><![CDATA[<p>内存中Bitmap大小的计算公式：<br>长占用的像素 <em> 宽占用的像素 </em> 每个像素占用的内存<br>避免OOM也就是要减小图片在内存中的大小，有两种方式等比缩小长宽和减少每个像素占用的内存。</p><ul><li><p>等比缩小长宽：<br>Bitmap的创建是通过BitmapFactory的工厂方法decodeFile()、decodeStream()、decodeByteArray()、decodeResource()。这些方法在创建Bitmap使都一个参数Options，Options中的属性inSampleSize用来对图片进行长宽的设置，inSampleSize的值是2的幂次方，通过设置合适的值来对图片进行缩放操作。  </p></li><li><p>减少像素内存：<br>Options中的属性inPreferredConfig，通过调整这个值的属性来改变每个像素所占的内存，默认值是ARGB_8888。  </p></li></ul><table><thead><tr><th>值</th><th>含义  </th></tr></thead><tbody><tr><td>ARGB_8888</td><td>A(Alpha)、R(Red)、G(Green)、B(Blue)各占8位的精度，加起来32位的精度（即4个字节），也就是一个像素占4个字节的长度</td></tr><tr><td>ARGB_4444</td><td>A(Alpha)、R(Red)、G(Green)、B(Blue)各占4位的精度，加起来16位的精度（即2个字节），也就是一个像素占2个字节的长度</td></tr><tr><td>RGB_565</td><td>R(Red)占5位精度、G(Green)占6位精度、B(Blue)占5位精度，一共16位精度，也就是2个字节，不携带透明度信息</td></tr><tr><td>ALPHA_8</td><td>每个像素占位（即一个字节），只办函透明度值，不携带颜色信息</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<p>内存中Bitmap大小的计算公式：<br>长占用的像素 <em> 宽占用的像素 </em> 每个像素占用的内存<br>避免OOM也就是要减小图片在内存中的大小，有两种方式等比缩小长宽和减少每个像素占用的内存。</p><ul><li><p>等比缩小长宽：<br>Bitmap的创建是通过BitmapFactory的工厂方法decodeFile()、decodeStream()、decodeByteArray()、decodeResource()。这些方法在创建Bitmap使都一个参数Options，Options中的属性inSampleSize用来对图片进行长宽的设置，inSampleSize的值是2的幂次方，通过设置合适的值来对图片进行缩放操作。  </p></li><li><p>减少像素内存：<br>Options中的属性inPreferredConfig，通过调整这个值的属性来改变每个像素所占的内存，默认值是ARGB_8888,修改为RGB_565或ARGB_4444可以减少一半的内存。  </p></li></ul><table><thead><tr><th>值</th><th>含义  </th></tr></thead><tbody><tr><td>ARGB_8888</td><td>A(Alpha)、R(Red)、G(Green)、B(Blue)各占8位的精度，加起来32位的精度（即4个字节），也就是一个像素占4个字节的长度</td></tr><tr><td>ARGB_4444</td><td>A(Alpha)、R(Red)、G(Green)、B(Blue)各占4位的精度，加起来16位的精度（即2个字节），也就是一个像素占2个字节的长度</td></tr><tr><td>RGB_565</td><td>R(Red)占5位精度、G(Green)占6位精度、B(Blue)占5位精度，一共16位精度，也就是2个字节，不携带透明度信息</td></tr><tr><td>ALPHA_8</td><td>每个像素占位（即一个字节），只办函透明度值，不携带颜色信息</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
