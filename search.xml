@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>图片加载如何避免OOM</title>
+      <link href="/2020/05/30/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8DOOM/"/>
+      <url>/2020/05/30/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8DOOM/</url>
+      
+        <content type="html"><![CDATA[<p>内存中Bitmap大小的计算公式：<br>长占用的像素 <em> 宽占用的像素 </em> 每个像素占用的内存<br>避免OOM也就是要减小图片在内存中的大小，有两种方式等比缩小长宽和减少每个像素占用的内存。</p><ul><li><p>等比缩小长宽：<br>Bitmap的创建是通过BitmapFactory的工厂方法decodeFile()、decodeStream()、decodeByteArray()、decodeResource()。这些方法在创建Bitmap使都一个参数Options，Options中的属性inSampleSize用来对图片进行长宽的设置，inSampleSize的值是2的幂次方，通过设置合适的值来对图片进行缩放操作。  </p></li><li><p>减少像素内存：<br>Options中的属性inPreferredConfig，通过调整这个值的属性来改变每个像素所占的内存，默认值是ARGB_8888。  </p></li></ul><table><thead><tr><th>值</th><th>含义  </th></tr></thead><tbody><tr><td>ARGB_8888</td><td>A(Alpha)、R(Red)、G(Green)、B(Blue)各占8位的精度，加起来32位的精度（即4个字节），也就是一个像素占4个字节的长度</td></tr><tr><td>ARGB_4444</td><td>A(Alpha)、R(Red)、G(Green)、B(Blue)各占4位的精度，加起来16位的精度（即2个字节），也就是一个像素占2个字节的长度</td></tr><tr><td>RGB_565</td><td>R(Red)占5位精度、G(Green)占6位精度、B(Blue)占5位精度，一共16位精度，也就是2个字节，不携带透明度信息</td></tr><tr><td>ALPHA_8</td><td>每个像素占位（即一个字节），只办函透明度值，不携带颜色信息</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> Android基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>IPC机制</title>
+      <link href="/2020/05/29/IPC%E6%9C%BA%E5%88%B6/"/>
+      <url>/2020/05/29/IPC%E6%9C%BA%E5%88%B6/</url>
+      
+        <content type="html"><![CDATA[<ul><li>进程与线程<br><em>进程一般指一个执行的单元，也可以称作正在运行的程序实例</em>。<em>线程是CPU进行运算调度的最小单元</em>，它的系统资源是有限的，它是包含在进程之中。所以进程与线程是包含与被包含的关系。  </li><li><p>什么是IPC？<br>IPC全称Inter-Process Communication，即进程间通信。一般应用采用多进程有是为了使应用能够获取更多的内存空间。由于一个进程对应分配一个虚拟机，进程与虚拟机的一一对应，造成我们对同一个类的对象在不同进程中就产生了对个副本，例如有processOne和processTwo两个进程，它们都有一个类A.class，那么在两个进程中的A.class是互不干扰的。总结起来对进程会造成一下几个问题：<br><em>1. 静态成员和单例模式失效；</em><br><em>2. 线程同步机制生效；</em><br><em>3. SharedPreferences可靠性降低（进程并发写可能异常）</em><br><em>4. Application多次创建（可以理解成Application的创建和进程的创建是一致的）</em>  </p></li><li><p>Binder机制<br>Binder是android进程间通信的方式，Binder时基于C/S架构，主要有四部分组成：<br><em>1. Client（客户端进程）</em><br><em>2. Server（服务端进程）</em><br><em>3. ServiceManager（提供注册、查询和返回代理服务对象的功能）</em><br><em>4. Binder驱动（主要进程间的连接，进程间数据交互等基础底层操作）</em>      </p><p><em>服务器通过Binder驱动在ServiceManager中注册服务</em><br><em>客户端通过Binder驱动查询Servicemanager中注册的服务</em><br><em>SreviceManager通过Binder驱动返回服务器代理对象</em><br><em>客户端拿到服务器的代理对象后即可进行进程间的通信</em>  </p></li><li><p>IPC方式比较  </p></li></ul><table><thead><tr><th></th><th>优</th><th>缺</th><th>适用场景  </th></tr></thead><tbody><tr><td>Bundle</td><td>使用简单</td><td>传输Bundle支持的数据类型</td><td>四大组件间的数据传递 </td></tr><tr><td>文件共享</td><td>使用简单</td><td>不适合高并发，无法进行即时通信</td><td>用于实时性不高的场景  </td></tr><tr><td> AIDL</td><td>功能强大 支持一对多并发下的通信，支持实时</td><td>使用较复杂，需要做好线程同步问题</td><td>一对多通信且有RPC需求 </td></tr><tr><td> Messenger</td><td>功能一般，支持一对多串行通信，支持实时通信</td><td>不支持RPC、不能很好处理高并发、数据通过Message进行传输，只能传输Bundle支持的数据类型</td><td>低并发的一对多即时通信 </td></tr><tr><td>ContentProvider</td><td>在数据源访问上功能强大，支持一对多的并发数据共享，可通过call操作扩展其他操作</td><td>提供数据源的CRUD操作</td><td>进程一对多的数据共享  </td></tr><tr><td>     Socket</td><td>功能强大，支持网络传输数据流、支持一对多的实时通信</td><td>实现较繁琐</td><td>网络数据共享</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> Android基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Android性能优化</title>
       <link href="/2020/05/27/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
       <url>/2020/05/27/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
@@ -11,6 +61,18 @@
         <content type="html"><![CDATA[<p>Android的性能优化主要从四方面入手，内存优化、布局优化、网络优化和安装包优化。  </p><ul><li><p>常用检查工具<br><em>LeakCanary</em>是一个三方检测内存泄漏的工具库 ，集成后会自动检测应用运行期间的内存泄漏，并直观的输出。<br>Android自带的<em>Android Profiler</em> ，可以检测CPU、MEMERY、NETWORK三方的性能。<br><em>BlockCanary</em>是一个三方用来检测UI卡顿的工具库，像LeakCanary一样集成后当发生UI卡顿现象时会输出卡顿的信息，通过输出的信息可以很方便的来定位导致卡顿的原因。</p></li><li><p>内存优化<br>内存优化的方式时避免内存泄漏（节流）、增加内存（开源）。<br>常见的内存泄露：</p></li></ul><ol><li>单例导致的泄漏。在创建单例时传入了具体页面的Context，由于单例的静态属性，导致单例一致持有该Context引用，一直到应用程序结束。正确的做法是创建单例时应用传入应用级别的Context，也就是Application的Context，这样就保证了单例生命周期与传入Context的统一。  </li><li>静态变量导致的内存泄漏。JVM中可以知道静态变量是在方法区的，它的生命周期是从类加载到应用程序结束，如果静态变量中持有了具体页面的Context就会导致页面finish后Context不会被GC，这样就导致了内存泄露。  </li><li>非静态内部类导致的内存泄露。非静态内部类创建呢的Handle或Thread在执行延时操作时一直持有当前的Activity引用，这时候在Activity finish后就会导致内存泄漏。解决方式是使用静态内部类并用弱引用调用Activity；另外还可以在onDestroy中调用handler.removeCallbacksAndMessages取消所有事件消息。  </li><li>使用资源没有及时关闭。常见操作有：数据流操作完没有关闭、bitmap没及时Recycle等</li><li>三方的没及时接绑。EventBus（unregister）和Rxjava中（dispose）。  </li><li>动画执行导致的。在Activity finish时动画执行还在进行。解决就是在onDestroy时cacel动画。  </li><li>WebView导致的泄漏。 WebView即使调用了destroy也会导致内存泄漏。解决方式时使用弱引用WeekReference或者将WebView所在的Activity置于另外一个进程中。</li></ol><p>增加内存方案一般会在Application下添加largeHeap=”true”，活着新开进程来时应用的内存总空间增大。</p><ul><li>布局优化  16ms</li></ul><ol><li>使用RelativeLayout减少View层级</li><li>利用<include>抽离常用的布局</include></li><li>使用<viewstub>加载不常用的布局</viewstub></li><li>使用<merge>减少布局嵌套</merge></li><li>减少多余的背景绘制</li><li>canvas.clipRect()裁剪可见区域，其他区域就不会被多余绘制。</li></ol><ul><li>网络优化  </li></ul><ol><li>合理合并网络请求</li><li>网络缓存</li><li>大数据分页请求</li><li>网络数据传输压缩（Gzip）</li><li>图片压缩、缩略图</li></ol><ul><li>安装包优化<br>apk的构成：</li></ul><ol><li>assets文件夹：配置文件、资源文件 文件夹内的资源时通过AssetManager类内方法获取。  </li><li>res：资源文件，文件名会自动生成对应ID映射到.R文件中。  </li><li>META-INF：保存呢应用的签名信息，保证APK的完整性。  </li><li>AndroidManifest.xml：描述应用的配置信息。  </li><li>classes.dex：Dalvik虚拟机可执行的字节码文件，SDK下dx工具将JAVA字节码转化为Dalvik字节码。  </li><li>resources.arsc：资源文件和资源ID间的映射关系。  </li></ol><p>根据spk的构成做一下几方面的优化：  </p><ol><li>混淆：使用proGuard代码混淆工具，它包含了代码的压缩、优化、混淆等功能。  </li><li>资源优化：利用lint工具删除冗余代码，资源文件的最小化等。  </li><li>重复功能库：去除一些功能重复库的引用。  </li><li>插件化：功能模块放在服务器上，按需下载。<br>5.so库优化：保留v7版本，删除armeabi和v8版本的SO库，v7库可以按足市场上绝大多树手机的要求。</li></ol>]]></content>
       
       
+      <categories>
+          
+          <category> Android基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android基础 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -734,7 +796,7 @@
       <link href="/2020/02/05/%E9%9D%A2%E8%AF%95%E7%A7%AF%E7%B4%AF/"/>
       <url>/2020/02/05/%E9%9D%A2%E8%AF%95%E7%A7%AF%E7%B4%AF/</url>
       
-        <content type="html"><![CDATA[<h2><span id="要求">要求：</span></h2><ul><li>薪酬结构</li><li>五险一金（全额，非全额要在基础薪资上调整）</li><li>技术团队规模</li><li>上下班时间 单双休 加班情况</li><li>人员配置 发版频率</li><li>绩效 年终奖</li><li>其他福利 餐补 车补贴 房补贴</li></ul><h2><span id="项目经验">项目经验：</span></h2><p>遇到了什么困难怎么解决的</p><ol><li>直播</li></ol><p>做了两方面的隔离，一是与其他业务模块的解耦 利用中间控制层 直播模块提供出对其他业务场景的依赖需求 其他业务模块提供这些能力给直播；二是把直播内部分为业务表现层和三方依赖层  具体做法是把三方直播依赖沉淀到baseview 把业务层需要的能力通过统一能力管理输出 （主要是直播画面能力控制和自定义消息协议的控制）</p><ol start="2"><li><p>首页</p></li><li><p>动画控件</p></li></ol><p>级联view<br>tab</p><h2><span id="java基础">java基础：</span></h2><ol><li><p>同步锁<br>同步锁的原理：</p></li><li><p>线程和进程</p></li></ol><ol start="4"><li><p>位运算<br>常见十进制D、二进制B、八进制Q和十六进制H（逢几进1）n<br>十进制向n进制转化：十进制转化为n进制时 十进制数一直除以n得余数 到一直不能整除为止，小数点部分是将小数部分乘以n 取整 然后小数部分继续乘以n 取整部分倒叙排序就是小数部分的值<br>二进制转n进制：采用r（二进制和n进制之间的位数差 例如八进制是3合1、十六进制时4合1，如果是32进制就是 5合1）合1的方式，如果位数不够r位，整数部分向左补零，小数部分向右补零，然后按照案权展开相加即可得</p></li><li><p>线程安全</p></li></ol><ol start="6"><li><p>进程保活</p></li><li><p>HashMap原理</p></li><li>HashTable</li></ol><h2><span id="数据结构与算法">数据结构与算法：</span></h2><ol><li>时间复杂度、空间复杂度</li><li></li></ol><h2><span id="网络">网络：</span></h2><ol><li><p>tcp的三次握手和四次挥手：<br>第一次：c端发送连接请求 序列号seq=x SYN创建连接状态<br>第二次：b端收到信息后 发送确认码ack=x+1 SYN=1<br>第三次：c端收到后</p></li><li><p>http2.0</p></li><li>Android下网络优化方案</li><li>QUIC协议</li><li><h2><span id="android基础">Android基础：</span></h2>android sdk<br>JNI framework<br>安卓系统架构<br>安全机制<br>Java内存管理</li></ol><h2><span id="三方库">三方库：</span></h2><ol><li><p>eventbus原理<br>利用反射触发事件函数的执行<br>关键的一个键值对来存储数据 key是eventType（传递的时事件类型）<br>线程模式 posting：处理函数看post在线程就在什么线程执行<br>main：处理函数在主线程执行<br>background：处理函数在子线程 post如果在主线程辉创建子线程 如果在子线程就直接在子线程触发处理<br>async：新建子线程触发处理函数的执行</p></li><li><p>butterknife原理</p></li><li>okhttp</li><li>rxjava</li><li>retrofit</li><li>Glide Fresco 三级缓冲</li></ol><h2><span id="其他">其他：</span></h2><p>对称加密和非对称加密</p>]]></content>
+        <content type="html"><![CDATA[<h2><span id="要求">要求：</span></h2><ul><li>薪酬结构</li><li>五险一金（全额，非全额要在基础薪资上调整）</li><li>技术团队规模</li><li>上下班时间 单双休 加班情况</li><li>人员配置 发版频率</li><li>绩效 年终奖</li><li>其他福利 餐补 车补贴 房补贴</li></ul><h2><span id="项目经验">项目经验：</span></h2><p>遇到了什么困难怎么解决的</p><ol><li>直播</li></ol><p>做了两方面的隔离，一是与其他业务模块的解耦 利用中间控制层 直播模块提供出对其他业务场景的依赖需求 其他业务模块提供这些能力给直播；二是把直播内部分为业务表现层和三方依赖层  具体做法是把三方直播依赖沉淀到baseview 把业务层需要的能力通过统一能力管理输出 （主要是直播画面能力控制和自定义消息协议的控制）</p><ol start="2"><li><p>首页</p></li><li><p>动画控件</p></li></ol><p>级联view<br>tab</p><h2><span id="java基础">java基础：</span></h2><ol><li><p>同步锁<br>同步锁的原理：</p></li><li><p>线程和进程</p></li></ol><ol start="4"><li><p>位运算<br>常见十进制D、二进制B、八进制Q和十六进制H（逢几进1）n<br>十进制向n进制转化：十进制转化为n进制时 十进制数一直除以n得余数 到一直不能整除为止，小数点部分是将小数部分乘以n 取整 然后小数部分继续乘以n 取整部分倒叙排序就是小数部分的值<br>二进制转n进制：采用r（二进制和n进制之间的位数差 例如八进制是3合1、十六进制时4合1，如果是32进制就是 5合1）合1的方式，如果位数不够r位，整数部分向左补零，小数部分向右补零，然后按照案权展开相加即可得</p></li><li><p>线程安全</p></li></ol><ol start="6"><li><p>进程保活</p></li><li><p>HashMap原理</p></li><li>HashTable</li><li>序列化</li></ol><h2><span id="数据结构与算法">数据结构与算法：</span></h2><ol><li>时间复杂度、空间复杂度</li><li></li></ol><h2><span id="网络">网络：</span></h2><ol><li><p>tcp的三次握手和四次挥手：<br>第一次：c端发送连接请求 序列号seq=x SYN创建连接状态<br>第二次：b端收到信息后 发送确认码ack=x+1 SYN=1<br>第三次：c端收到后</p></li><li><p>http2.0</p></li><li>Android下网络优化方案</li><li>QUIC协议</li><li><h2><span id="android基础">Android基础：</span></h2>pt px dp<br>android sdk<br>JNI framework<br>安卓系统架构<br>安全机制<br>Java内存管理</li></ol><h2><span id="三方库">三方库：</span></h2><ol><li><p>eventbus原理<br>利用反射触发事件函数的执行<br>关键的一个键值对来存储数据 key是eventType（传递的时事件类型）<br>线程模式 posting：处理函数看post在线程就在什么线程执行<br>main：处理函数在主线程执行<br>background：处理函数在子线程 post如果在主线程辉创建子线程 如果在子线程就直接在子线程触发处理<br>async：新建子线程触发处理函数的执行</p></li><li><p>butterknife原理</p></li><li>okhttp</li><li>rxjava</li><li>retrofit</li><li>Glide Fresco 三级缓冲</li></ol><h2><span id="其他">其他：</span></h2><p>对称加密和非对称加密</p>]]></content>
       
       
       

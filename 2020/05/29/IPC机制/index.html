@@ -11,15 +11,15 @@
   <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
   
   
-    <meta name="keywords" content="">
+    <meta name="keywords" content="Android基础,">
   
 
   
-    <meta name="description" content="about">
+    <meta name="description" content="Android基础">
   
   
   <link rel="icon" type="image/x-icon" href="/logo.png">
-  <title>about [ litchi ]</title>
+  <title>IPC机制 [ litchi ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -68,15 +68,133 @@
 
   <div class="container" id="content-outer">
     <div class="inner" id="content-inner">
-      <article class="post page" id="page">
-  <header class="post-header text-center">
-  </header>
-  <div class="post-content">
+      <div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">
+        IPC机制
+      </h1>
+      <span>
+        
+        <time class="time" datetime="2020-05-29T12:33:15.000Z">
+        2020-05-29
+      </time>
+        
+      </span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+      <span class="post-tags">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
+      </span>
+    </span>
+      <span class="slash">/</span>
+      <span class="read">
+      <span id="busuanzi_value_page_pv"></span> 点击
+    </span>
+      <span class="slash">/</span>
+    </header>
+
+    <div class="post-content">
+      <ul>
+<li>进程与线程<br><em>进程一般指一个执行的单元，也可以称作正在运行的程序实例</em>。<em>线程是CPU进行运算调度的最小单元</em>，它的系统资源是有限的，它是包含在进程之中。所以进程与线程是包含与被包含的关系。  </li>
+<li><p>什么是IPC？<br>IPC全称Inter-Process Communication，即进程间通信。一般应用采用多进程有是为了使应用能够获取更多的内存空间。由于一个进程对应分配一个虚拟机，进程与虚拟机的一一对应，造成我们对同一个类的对象在不同进程中就产生了对个副本，例如有processOne和processTwo两个进程，它们都有一个类A.class，那么在两个进程中的A.class是互不干扰的。总结起来对进程会造成一下几个问题：<br><em>1. 静态成员和单例模式失效；</em><br><em>2. 线程同步机制生效；</em><br><em>3. SharedPreferences可靠性降低（进程并发写可能异常）</em><br><em>4. Application多次创建（可以理解成Application的创建和进程的创建是一致的）</em>  </p>
+</li>
+<li><p>Binder机制<br>Binder是android进程间通信的方式，Binder时基于C/S架构，主要有四部分组成：<br><em>1. Client（客户端进程）</em><br><em>2. Server（服务端进程）</em><br><em>3. ServiceManager（提供注册、查询和返回代理服务对象的功能）</em><br><em>4. Binder驱动（主要进程间的连接，进程间数据交互等基础底层操作）</em>      </p>
+<p><em>服务器通过Binder驱动在ServiceManager中注册服务</em><br><em>客户端通过Binder驱动查询Servicemanager中注册的服务</em><br><em>SreviceManager通过Binder驱动返回服务器代理对象</em><br><em>客户端拿到服务器的代理对象后即可进行进程间的通信</em>  </p>
+</li>
+<li><p>IPC方式比较  </p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>优</th>
+<th>缺</th>
+<th>适用场景  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bundle</td>
+<td>使用简单</td>
+<td>传输Bundle支持的数据类型</td>
+<td>四大组件间的数据传递 </td>
+</tr>
+<tr>
+<td>文件共享</td>
+<td>使用简单</td>
+<td>不适合高并发，无法进行即时通信</td>
+<td>用于实时性不高的场景  </td>
+</tr>
+<tr>
+<td> AIDL</td>
+<td>功能强大 支持一对多并发下的通信，支持实时</td>
+<td>使用较复杂，需要做好线程同步问题</td>
+<td>一对多通信且有RPC需求 </td>
+</tr>
+<tr>
+<td> Messenger</td>
+<td>功能一般，支持一对多串行通信，支持实时通信</td>
+<td>不支持RPC、不能很好处理高并发、数据通过Message进行传输，只能传输Bundle支持的数据类型</td>
+<td>低并发的一对多即时通信 </td>
+</tr>
+<tr>
+<td>ContentProvider</td>
+<td>在数据源访问上功能强大，支持一对多的并发数据共享，可通过call操作扩展其他操作</td>
+<td>提供数据源的CRUD操作</td>
+<td>进程一对多的数据共享  </td>
+</tr>
+<tr>
+<td>     Socket</td>
+<td>功能强大，支持网络传输数据流、支持一对多的实时通信</td>
+<td>实现较繁琐</td>
+<td>网络数据共享</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    <div>全文完。</div>
+  </article>
+  <div class="toc-container">
     
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android基础/">Android基础</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据存储/">数据存储</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul>
-      
+
   </div>
-</article>
+</div>
+<div class="copyright">
+    <span>本作品采用</span>
+    <a href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>
+    <span>进行许可。 转载时请注明原文链接。</span>
+</div>
+<div class="share" style="width: 100%;">
+  
+</div>
+
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/2020/05/27/Android性能优化/" rel="next" title="Android性能优化">
+          Android性能优化
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+          
+          <a href="/2020/05/30/图片加载如何避免OOM/" rel="prev" title="图片加载如何避免OOM">
+            图片加载如何避免OOM
+          </a>
+          <span>〉</span>
+        
+      </div>
+    </div>
+  
+
+
     </div>
 
     
