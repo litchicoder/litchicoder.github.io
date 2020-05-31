@@ -11,15 +11,15 @@
   <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
   
   
-    <meta name="keywords" content="">
+    <meta name="keywords" content="Android基础,">
   
 
   
-    <meta name="description" content="litchi,litchi blog">
+    <meta name="description" content="Android基础">
   
   
   <link rel="icon" type="image/x-icon" href="/logo.png">
-  <title>archives: 2020 [ litchi ]</title>
+  <title>Android系统架构 [ litchi ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -46,7 +46,7 @@
           
       
           
-            <li class="pure-menu-item actived"><a href="/archives" class="pure-menu-link">归档</a></li>
+            <li class="pure-menu-item"><a href="/archives" class="pure-menu-link">归档</a></li>
           
       
           
@@ -68,217 +68,89 @@
 
   <div class="container" id="content-outer">
     <div class="inner" id="content-inner">
-      
+      <div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">
+        Android系统架构
+      </h1>
+      <span>
+        
+        <time class="time" datetime="2020-05-31T12:13:09.000Z">
+        2020-05-31
+      </time>
+        
+      </span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+      <span class="post-tags">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
+      </span>
+    </span>
+      <span class="slash">/</span>
+      <span class="read">
+      <span id="busuanzi_value_page_pv"></span> 点击
+    </span>
+      <span class="slash">/</span>
+    </header>
 
-  
-  
+    <div class="post-content">
+      <p>Android采用分层架构，从上到下分别为<em>应用程序层（apps、System apps）、应用程序框架层（Java API Framework）、系统运行库和运行环境层（Libraries+Android Runtime）和Linux核心层（HAL+Linux Kernel）</em>。</p>
+<p><img src="android_framework.png" alt=""></p>
+<ul>
+<li><p>System apps<br>可以理解为内置的系统应用，可以像调用Java APIFramework一样区调用系统应用，例如我们调用日历区添加一个日常提醒。</p>
+</li>
+<li><p>Java ApI Framewor<br>android中常用的组件</p>
+</li>
+<li><p>Native c/c++ Libraries<br>本地库比Java API Framework更加偏低层，这里包含OpenGl、多媒体框架等内容。 </p>
+</li>
+<li><p>Android Runtime<br>Android运行时环境，也就是Android虚拟机。Android5.0之前是使用Dalvik虚拟机，<em>Dalvik虚拟机是基于JIT（Just in TIme）及时编译的引擎。Android5.0之后采用ART虚拟机，ART虚拟机是基于AOT（Ahead Of Time）作为编译引擎</em></p>
+</li>
+<li><p>Hardware Abstrction Layer<br>硬件抽象层主要是媒体、蓝牙、传感器的库模块。</p>
+</li>
+<li><p>Linux Kernel<br>Android平台的最底层，直接与硬件交互，负责硬件驱动、进程管理、内存管理、网络管理等功能。</p>
+</li>
+</ul>
+<p><em>什么是JIT和AOT？</em><br>在Android中Java代码会被转换成DEX字节码文件，DEX字节码文件是Android虚拟机可以识别的，Android虚拟机把字节码在转化为机器能识别的机器码。<br>Dalvik虚拟机给予JIT编译，JIT也叫及时编译器，JIT工作原理是在应用运行时，首先将一部分DEX字节码转化为机器码，在程序执行的过程中再陆续将更多代码编译并缓冲，这样做的好处是内存占用少，但CPU再应用运行期间相对消耗大。<br>AOT叫做提前编译器，它是在应用的安装期间就将DEX字节码转化为了机器码，并将其存储在设备上。这样做的好处是在应用运行时占用CPu资源少一些，因为已经转化成了机器码，相对内存占用上多一些。</p>
+
+    </div>
+
+    <div>全文完。</div>
+  </article>
+  <div class="toc-container">
     
-    
-    <section class="post page archives">
-      <h3 class="archive-year-wrap">
-        <a href="/archives/2020" class="archive-year">
-          2020
-        </a>
-      </h3>
-      <div class="archives">
+
+  </div>
+</div>
+<div class="copyright">
+    <span>本作品采用</span>
+    <a href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>
+    <span>进行许可。 转载时请注明原文链接。</span>
+</div>
+<div class="share" style="width: 100%;">
   
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/19/java引用类型/">
-    <div>
-      <span class="date">
-        05-19
-      </span>
-      <span class="slash">/</span>
-      java引用类型
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
 </div>
 
   
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/2020/05/30/图片加载如何避免OOM/" rel="next" title="图片加载如何避免OOM">
+          图片加载如何避免OOM
+          </a>
+        
+      </div>
   
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/19/单例模式/">
-    <div>
-      <span class="date">
-        05-19
-      </span>
-      <span class="slash">/</span>
-      单例模式
+      <div class="post-nav-item post-nav-prev">
+          
+      </div>
     </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
   
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/19/final、finally和finalize/">
-    <div>
-      <span class="date">
-        05-19
-      </span>
-      <span class="slash">/</span>
-      final、finally和finalize
-    </div>
 
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/15/线程间通信方式/">
-    <div>
-      <span class="date">
-        05-15
-      </span>
-      <span class="slash">/</span>
-      线程间通信方式
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/15/JAVA线程池的使用/">
-    <div>
-      <span class="date">
-        05-15
-      </span>
-      <span class="slash">/</span>
-      JAVA线程池的使用
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/13/关键字volatile和synchronized/">
-    <div>
-      <span class="date">
-        05-13
-      </span>
-      <span class="slash">/</span>
-      关键字volatile和synchronized
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/13/join方法/">
-    <div>
-      <span class="date">
-        05-13
-      </span>
-      <span class="slash">/</span>
-      join方法
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/12/sleep方法和wait方法/">
-    <div>
-      <span class="date">
-        05-12
-      </span>
-      <span class="slash">/</span>
-      “sleep方法和wait方法”
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/11/“死锁”/">
-    <div>
-      <span class="date">
-        05-11
-      </span>
-      <span class="slash">/</span>
-      “死锁”
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/05/09/HashMap原理/">
-    <div>
-      <span class="date">
-        05-09
-      </span>
-      <span class="slash">/</span>
-      HashMap原理
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-
-  </div></section>
 
     </div>
 
-    
-      <nav class="page-nav text-center">
-          <a class="extend prev" rel="prev" href="/archives/2020/">〈</a><a class="page-number" href="/archives/2020/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2020/page/3/">3</a><a class="page-number" href="/archives/2020/page/4/">4</a><a class="extend next" rel="next" href="/archives/2020/page/3/">〉</a>
-      </nav>
     
 
   </div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-05-30T15:19:51.691Z</updated>
+  <updated>2020-05-31T13:29:00.323Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android系统架构</title>
+    <link href="/2020/05/31/Android%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+    <id>/2020/05/31/Android系统架构/</id>
+    <published>2020-05-31T12:13:09.000Z</published>
+    <updated>2020-05-31T13:29:00.323Z</updated>
+    
+    <content type="html"><![CDATA[<p>Android采用分层架构，从上到下分别为<em>应用程序层（apps、System apps）、应用程序框架层（Java API Framework）、系统运行库和运行环境层（Libraries+Android Runtime）和Linux核心层（HAL+Linux Kernel）</em>。</p><p><img src="android_framework.png" alt=""></p><ul><li><p>System apps<br>可以理解为内置的系统应用，可以像调用Java APIFramework一样区调用系统应用，例如我们调用日历区添加一个日常提醒。</p></li><li><p>Java ApI Framewor<br>android中常用的组件</p></li><li><p>Native c/c++ Libraries<br>本地库比Java API Framework更加偏低层，这里包含OpenGl、多媒体框架等内容。 </p></li><li><p>Android Runtime<br>Android运行时环境，也就是Android虚拟机。Android5.0之前是使用Dalvik虚拟机，<em>Dalvik虚拟机是基于JIT（Just in TIme）及时编译的引擎。Android5.0之后采用ART虚拟机，ART虚拟机是基于AOT（Ahead Of Time）作为编译引擎</em></p></li><li><p>Hardware Abstrction Layer<br>硬件抽象层主要是媒体、蓝牙、传感器的库模块。</p></li><li><p>Linux Kernel<br>Android平台的最底层，直接与硬件交互，负责硬件驱动、进程管理、内存管理、网络管理等功能。</p></li></ul><p><em>什么是JIT和AOT？</em><br>在Android中Java代码会被转换成DEX字节码文件，DEX字节码文件是Android虚拟机可以识别的，Android虚拟机把字节码在转化为机器能识别的机器码。<br>Dalvik虚拟机给予JIT编译，JIT也叫及时编译器，JIT工作原理是在应用运行时，首先将一部分DEX字节码转化为机器码，在程序执行的过程中再陆续将更多代码编译并缓冲，这样做的好处是内存占用少，但CPU再应用运行期间相对消耗大。<br>AOT叫做提前编译器，它是在应用的安装期间就将DEX字节码转化为了机器码，并将其存储在设备上。这样做的好处是在应用运行时占用CPu资源少一些，因为已经转化成了机器码，相对内存占用上多一些。</p>]]></content>
+    
+    <summary type="html">
+    
+      Android基础
+    
+    </summary>
+    
+      <category term="Android基础" scheme="/categories/Android%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="Android基础" scheme="/tags/Android%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>图片加载如何避免OOM</title>
@@ -434,33 +456,6 @@
     
     
       <category term="JAVA基础" scheme="/tags/JAVA%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>运行时数据区</title>
-    <link href="/2020/05/08/%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/"/>
-    <id>/2020/05/08/运行时数据区/</id>
-    <published>2020-05-08T05:07:49.000Z</published>
-    <updated>2020-05-08T08:18:38.654Z</updated>
-    
-    <content type="html"><![CDATA[<p>运行时数据区也就是JVM运行时的内存区域，这里主要划分为堆区、方法区、虚拟机栈、本地方法栈和PC寄存器。<br><img src="vm_stack.jpg" alt="">  </p><ul><li>堆区：<br>堆区是这其中最大的一块区域，保存几乎所有创建出来的对象实例，这块区域是线程共享的，堆区是垃圾回收的主要区域，因此也叫“GC堆”,在GC回收时采用分代收集算法，所以堆区分为新生代和老年代。堆区在物理上时不连续的，在逻辑中看作是连续的。在堆区分配内存给对象实例时如果内存不足，会抛出OutOfMemoryError异常。<br><em>Minor Gc和Major Gc(Full GC)</em>：Minor Gc是指新生代垃圾回收的动作，新创建的对象都会在新生代，所以Minor Gc相对频繁，回收速度相对也快；Major Gc(Full GC)时老年代的垃圾回收动作，Major Gc(Full GC)回收频率较慢，速度也较慢。  </li><li>方法区：<br>方法区线程共享，方法去存储类的信息、常量、静态变量以及<em>运行时常量池</em>(Runtime Constant Pool:常量不一定只能在编译期产生，运行期间也可能产生新的常量，这些常量被放在运行时常量池中，例如通过String.intern()将String放入常量池)。  </li><li>虚拟机栈和本地方法栈：<br><em>虚拟机栈</em>每个线程在创建时都会创建一个虚拟机栈，内部是由一个个的栈帧组成(Stack Frame)，一个栈帧就对应一个Java方法调用。<br>它主管Java程序的运行，保存方法的局部变量（8中基本数据类型、对象引用地址）、部分结果，并参与方法的调用和返回。<br>虚拟机栈的大小允许是固定的或者是动态的：  <blockquote><p>虚拟机栈大小固定情况下，如果线程请求分配的栈容量超过了虚拟机栈允许的最大容量就会报StackOverFlowError异常。<br>虚拟机栈大小动态的情况下，当虚拟机栈请求扩展容量而这时内存不足JVM就会抛出OutOfMemoryError异常，同样在创建线程时如果没有足够的内存空间提供给虚拟机栈，也会报OutOfMemoryError异常。  </p></blockquote></li></ul><p>每个栈帧包含：局部变量表、操作数栈、动态链接和方法返回地址。<br>1.局部变量表：<br><em>局部变量表存储方法参数和定义在方法内的局部变量</em>，局部变量表的存储单位时slot（变量槽），存储的数据类型包括基本数据类型、引用数据类型和返回地址类型。  </p><blockquote><p><em>局部变量表的大小是在编译期间就确定下来的。</em>  </p></blockquote><p>2.操作数栈：<br>操作数栈在方法执行的过程中根据字节码指令写或者提取数据（入栈和出栈）。<br><img src="operate_stack.jpg" alt=""><br>3.动态链接（Dynamic Linking）：<br><em>即指向运行时常量池的引用</em>它是栈帧内部指向运行时常量池中该栈帧所属方法的引用。动态链接的作用是为将符号应用转换为调用方法的直接引用。<br>4.方法返回地址（return address）：<br>方法返回地址存放调用该方法的PC寄存器的值。方法退出救市栈帧出栈的过程，此时需要恢复上层方法的局部变量表、操作数栈，将返回值压入调用者的操作数栈中，更新PC寄存器，调用者继续执行接下来的指令。<br><em>异常完成退出不会给上层调用者产生任何返回值</em>  </p><blockquote><p>本地方法栈结构与Java虚拟机栈相同，只是它服务的是本地方法，也有些虚拟机中将本地方法栈和Java虚拟机栈合二为一。  </p></blockquote><ul><li>PC寄存器（Program Counter Register）：<br><em>PC寄存器</em>用来存放下一行执行指令的地址，由执行引擎读取下条指令。根据是一块很小的内存区域，每个线程都有自己的PC寄存器，它是线程私有的区域，生命周期与线程的生命周期保持一致。PC寄存器是JVM规范中唯一一个不会发生OutOfMemory的区域，也不存在GC。PC寄存器可以保证线程切换时指令不会发生异常，在来回切换后可以回到切换前执行位置继续执行。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;运行时数据区也就是JVM运行时的内存区域，这里主要划分为堆区、方法区、虚拟机栈、本地方法栈和PC寄存器。&lt;br&gt;&lt;img src=&quot;vm_stack.jpg&quot; alt=&quot;&quot;&gt;  &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;堆区：&lt;br&gt;堆区是这其中最大的一块区域，保存几乎所有创建出来的对象
-      
-    
-    </summary>
-    
-      <category term="JVM" scheme="/categories/JVM/"/>
-    
-    
-      <category term="JVM" scheme="/tags/JVM/"/>
     
   </entry>
   
