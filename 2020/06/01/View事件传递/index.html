@@ -104,7 +104,7 @@
 <li>ACTION_UP：手指从屏幕上离开的瞬间；<br>MotionEvent的两组位置方式：<br>getX()/getY()：表示动作相对于View左上角位置的x、y坐标；<br>getRawX()/getRawY()：表示动作相对于屏幕左上角位置的x、y坐标；  </li>
 </ol>
 <ul>
-<li>事件分发<br><code>public boolean dispatchTouchEvent(MotionEvent ev)</code><br>用于事件的分发，如果时间传递到了当前的View，那么该方法一定会被调用，boolean类型的返回值受View的onTouchEvent(MotionEvent event)和其子View的dispatchTouchEvent(MotionEvnet event)的影响，返回true表示消耗当前时间。<br><code>public boolean onInterceptTouchEvent(MotionEvent event)</code><br>用来判断是否拦截当前事件，返回结果表示是否拦截当前事件。<br><code>public boolean onTouchEvent(MotionEvent event)</code><br>在dispatchTouchEvent方法中被调用，用来处理touch事件，返回结果表示是否消耗当前事件。  </li>
+<li>事件分发<br><code>public boolean dispatchTouchEvent(MotionEvent event)</code><br>用于事件的分发，如果时间传递到了当前的View，那么该方法一定会被调用，boolean类型的返回值受View的onTouchEvent(MotionEvent event)和其子View的dispatchTouchEvent(MotionEvnet event)的影响，返回true表示消耗当前时间。<br><code>public boolean onInterceptTouchEvent(MotionEvent event)</code><br>用来判断是否拦截当前事件，返回结果表示是否拦截当前事件。<br><code>public boolean onTouchEvent(MotionEvent event)</code><br>在dispatchTouchEvent方法中被调用，用来处理touch事件，返回结果表示是否消耗当前事件。  </li>
 </ul>
 <p><img src="view_event_work.jpg" alt=""><br><img src="view_event_process.jpg" alt=""></p>
 <p>说明：  </p>
@@ -114,7 +114,7 @@
 <li>如果View再处理事件过程中，不再消耗ACTION_DOWN事件（onTouch返回false），那么事件序列的其他事件将会被其父元素进行消耗。  </li>
 <li>ViewGroup默认不拦截事件。  </li>
 <li>VIew没有onInterveptTouchEvent方法，View默认的onTouchEvent都会消耗事件（默认返回true）。  </li>
-<li>事件传递是由外向内的，即事件总是先传递给父元素，然后通过父元素分发给子View，通过requestDisallowIntercept<br>TouchEvnet方法来干预父元素的事件分发过程，但是ACTION_DOWN事件除外。</li>
+<li>事件传递是由外向内的，即事件总是先传递给父元素，然后通过父元素分发给子View，通过requestDisallowInterceptTouchEvnet方法来干预父元素的事件分发过程，但是ACTION_DOWN事件除外。</li>
 </ol>
 
     </div>
@@ -148,6 +148,11 @@
   
       <div class="post-nav-item post-nav-prev">
           
+          <a href="/2020/06/02/View绘制/" rel="prev" title="View绘制">
+            View绘制
+          </a>
+          <span>〉</span>
+        
       </div>
     </div>
   
