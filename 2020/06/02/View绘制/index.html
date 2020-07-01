@@ -108,9 +108,10 @@
 <p>代码里可以看到MeasureSpec将SpecMode和SpecSize打包成一个int值，这样可以避免过多的内存分配，getMode和getSize方法利用MODE_MASK与操作来得到需要的mode和size值。<br>SpecMode有三种模式：  </p>
 <ol>
 <li>UNSPECIFIED：[ʌnˈspesɪfaɪd]未说明的，没有明确的。父容器对于View没有任何限制，想要多大就给多大。  </li>
-<li>EXACTLY：[ɪɡˈzæktli] 明确的。父容器决定了明确的大小，View的大小就是SpecSize指定的值，它对应LayoutParams中的match_parent或指定大小值的两种场景。  </li>
-<li>AT_MOST:父容器指定一个可用的SpecSize，View不能大于这个值，具体的值由View内部具体实现决定。对应LayoutParams中的wrap_content。 </li>
+<li>EXACTLY：[ɪɡˈzæktli] 明确的。它对应LayoutParams中的match_parent或指定大小值的两种场景。<em>父容器给出了一个确定的范围，如果view设置了具体值这个具体没有超出给定的范围那么就是这个具体值，如果超出了那view的大小就是父容器给定的限制值或者直接就指定限制值也就是match_parent的场景</em>  </li>
+<li>AT_MOST:<em>view想要多大就是多大</em>，至到达到指定的值。对应LayoutParams中的wrap_content。 </li>
 </ol>
+<p>这三个值的设置是站在父容器的角度衡量view的，UNSPECIFIED是父容器没有对view做限制，EXACTLY是父容器给出了一个明确限制值（最大边界）来约束view，AT_MOST则是按照view的想要的来展示，但也有指定值来限定。</p>
 <p><em>对于一个普通的View，它的MeasureSpec是由父容器的MeasureSpec和自身设置的LayoutParam参数来决定的，比如View设置了固定的宽或者高那么它在宽或者高方向上的SpecMode就是EXCATLY，无论它的父容器设置什么测量模式</em></p>
 
     </div>
