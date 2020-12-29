@@ -98,9 +98,9 @@
       <ul>
 <li>View的绘制流程  </li>
 </ul>
-<p>View的绘制是从ViewRootImpl类的performTraversals方法开始经过measure、layout、draw三个过程将View绘制出来的，measure方法用来测量View的宽高，layout用来确定View再敷容器内的位置，draw绘制View。</p>
+<p>View的绘制是从ViewRootImpl类的performTraversals方法开始经过measure、layout、draw三个过程将View绘制出来的，measure方法用来测量ViewGroup/View的宽高，layout用来确定View的最终宽高和在容器内的位置，draw绘制View到屏幕上。</p>
 <p><img src="view_process.jpg" alt=""></p>
-<p>performTraversals方法会依次调用perfomrMeasure，performLayout和performDraw，这三个方法完成最上层View的绘制流程，然后会调用onMeasure，onMeasure中会调用对所有子元素的measure方法，这样就完成了一次measure过程，接着子元素会重复父容器的的measure过程。  </p>
+<p>performTraversals方法会依次调用perfomrMeasure，performLayout和performDraw，这三个方法依次调用底层View的绘制流程，也就是调用onMeasure、onLayout和onDraw，三个方法通过递归方式完成整个布局的绘制。  </p>
 <ul>
 <li>MeasureSpec<br>MeasureSpec可以理解为“测量规则”或“测量标准”。MeasureSpec用一个32位的int值来表示，高2位代表SpecMode（测量模式），低30位代表SpecSize（规格大小）。代码定义这样的：  </li>
 </ul>
@@ -113,6 +113,8 @@
 </ol>
 <p>这三个值的设置是站在父容器的角度衡量view的，UNSPECIFIED是父容器没有对view做限制，EXACTLY是父容器给出了一个明确限制值（最大边界）来约束view，AT_MOST则是按照view的想要的来展示，但也有指定值来限定。</p>
 <p><em>对于一个普通的View，它的MeasureSpec是由父容器的MeasureSpec和自身设置的LayoutParam参数来决定的，比如View设置了固定的宽或者高那么它在宽或者高方向上的SpecMode就是EXCATLY，无论它的父容器设置什么测量模式</em></p>
+<p><em>View的绘制流程和activity的生命周期是不同步的，所以在onresume中直接获得view宽高是错误的，可以痛殴VIewTreeObser监听绘制过程或者通过View.post方法投递一个消息队列到尾部，等待looper调用该runnable时view已经初始化</em></p>
+<p>postscript：getMeasureWidth和getWidth的区别</p>
 
     </div>
 
