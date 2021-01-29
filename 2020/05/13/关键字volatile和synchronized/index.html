@@ -112,11 +112,11 @@
 <li>store（存储）：作用于工作内存的变量，把一个工作内存中的变量的值传送到主内存中，以便于随后的write操作；  </li>
 <li>write（写入）：作用于主内存的变量，把store操作从工作内存中的一个变量的值传送到主内存的变量中。  </li>
 </ol>
-<p>3个特性：<br>1.原子性（Atomicity）：原子代表不可分割的最小单位。原子性指一个操作或多个操作要么全部执行，要么就都不执行。例如银行转账操作 A账户减去10000元和B账户增加10000元必须全部执行，否则就会出现错误，这两个操作不可再分割。<br>read、load、use、assign、store、write操作都保证了原子性的操作，基本数据类型的读取大致都具有原子性。更大范围保证原子性JMM提供了lock和unlock操作，JVM提供了更高层次的字节码指令monitorenter和monitorexit来隐式使用这两个操作，这两个字节码指令反映到Java代码中就是同步块——synchronized关键字，因此在synchronized块之间的操作也具备原子性。<br>2.可见性（Visibility）：一个线程中堆共享变量（类中的成员变量或静态变量）的修改，其他线程立即得知这个修改。<br>保证可见性的操作：<br>volatile：volatile的特殊规则保证了新值立即同步到主内存中，以及每次使用前立即从主内存中刷新。<br>synchronized：synchronized关键字在释放锁之前，必须到此变量同步回主内存中（执行了store、write操作）。<br>final：final修饰的变量，一旦完成初始化，其他线程就能看见final字段的值。<br>3.有序性（Orderly）：有序性主要涉及了指令重排序现象和“工作内存与主内存同步延迟”现象。总结为一句话：如果在本线程内观察，所有的操作都是有序的；如果在一个线程中观察另一个线程，所有的操作都是无序的。<br>为了执行的效率，有时候会发生指令重排，这在单线程中指令重排之后的输出与我们的代码逻辑输出还是一致的。但在多线程中就可能发生问题，volatile在一定程度上可以避免指令重排。</p>
+<p>3个特性：<br>1.原子性（Atomicity）：原子代表不可分割的最小单位。原子性指一个操作或多个操作要么全部执行，要么就都不执行。例如银行转账操作 A账户减去10000元和B账户增加10000元必须全部执行，否则就会出现错误，这两个操作不可再分割。<br>read、load、use、assign、store、write操作都保证了原子性的操作，基本数据类型的读取大致都具有原子性。更大范围保证原子性JMM提供了lock和unlock操作，JVM提供了更高层次的字节码指令monitorenter和monitorexit来隐式使用这两个操作，这两个字节码指令反映到Java代码中就是同步块——synchronized关键字，因此在synchronized块之间的操作也具备原子性。<br>2.可见性（Visibility）：一个线程中堆共享变量（类中的成员变量或静态变量）的修改，其他线程立即得知这个修改。<br>保证可见性的操作：<br>volatile：volatile的特殊规则保证了新值立即同步到主内存中，以及每次使用前立即从主内存中刷新。<br>synchronized：synchronized关键字在释放锁之前，必须把此变量同步回主内存中（执行了store、write操作）。<br>final：final修饰的变量，一旦完成初始化，其他线程就能看见final字段的值。<br>3.有序性（Orderly）：有序性主要涉及了指令重排序现象和“工作内存与主内存同步延迟”现象。总结为一句话：如果在本线程内观察，所有的操作都是有序的；如果在一个线程中观察另一个线程的所有的操作都是无序的。<br>为了执行的效率，有时候会发生指令重排，这在单线程中指令重排之后的输出与我们的代码逻辑输出还是一致的。但在多线程中就可能发生问题，volatile在一定程度上可以避免指令重排。</p>
 <ul>
 <li><p>volatile和synchronized  </p>
 <blockquote>
-<p>synchronized保证了原子性和可见性，JMM中synchronized块执行流程清空工作内存-&gt;在主内存中拷贝变量值到工作内存的副本中-&gt;执行完代码-&gt;将更新后的共享变量值刷新到主内存中-&gt;释放同步锁<br>volatile保证了可见性和有序性。线程中volatile修饰的变量对其他线程共享变量的修改是可立即看见的。有序性上volatile可以一定程度避免指令重排，volatile在生成指令上回家一个lock前缀，这个前缀相当于内存屏障可以避免指令重排序不能把后面的指令重排序到内存屏障之前的位置。<br>synchronized作用于代码块和方法，而volatile是变量修饰符。<br>volatile不会造成线程的阻塞,而synchronized可能会造成线程阻塞。  </p>
+<p>synchronized保证了原子性和可见性，JMM中synchronized块执行流程清空工作内存-&gt;在主内存中拷贝变量值到工作内存的副本中-&gt;执行完代码-&gt;将更新后的共享变量值刷新到主内存中-&gt;释放同步锁<br>volatile保证了可见性和有序性。线程中volatile修饰的变量对其他线程共享变量的修改是可立即看见的。有序性上volatile可以一定程度避免指令重排，volatile在生成指令上会加一个lock前缀，这个前缀相当于内存屏障可以避免指令重排序不能把后面的指令重排序到内存屏障之前的位置。<br>synchronized作用于代码块和方法，而volatile是变量修饰符。<br>volatile不会造成线程的阻塞,而synchronized可能会造成线程阻塞。  </p>
 </blockquote>
 </li>
 <li><p>synchronized用法<br>1.（普通class）当一个线程访问对象中的synchronized(this)同步代码块时，其他试图访问这个对象的synchronized(this)同步代码块的线程将被阻塞。  </p>
@@ -135,7 +135,8 @@
 <blockquote>
 <p>threadA test counter is0<br>threadA test counter is1<br>threadA test counter is2<br>threadA test counter is3<br>threadA test counter is4<br>threadB test2 counter is0<br>threadB test2 counter is1<br>threadB test2 counter is2<br>threadB test2 counter is3<br>threadB test2 counter is4</p>
 </blockquote>
-<p>5.当synchronized修饰的是一个类时，场景与4相同，属于类锁。</p>
+<p>5.当synchronized修饰的是一个类时，场景与4相同，属于类锁。 </p>
+<p><em>synchronized修饰类和静态方法时它作用在类上，属于类锁；修饰普通方法、代码块时它作用在类的对象上，属于对象锁，类锁和对象锁作用的目标时不同的，所以它两互不干扰</em></p>
 
     </div>
 
