@@ -123,7 +123,10 @@
 </ul>
 <p>自定义网络层拦截器：<br>如果需要打印网络重试、重定向等信息可以使用网络</p>
 <ul>
-<li>OkHttp中用到了哪些设计模式？<br>1.建造者模式（Builder模式）适合构造函数入参多而杂的情况下使用：<br>说明：使用一个Builder类一步步构建最终的对象。目标对象是由多个“配置”组合构造出来的。<br>OkHttpClient、Request、Response、Headers、HttpUrl都是用了构造者模式。<br>2.工厂模式：<br>说明：创建目标对象不需要对对象使用者暴露创建逻辑，对外屏蔽对象具体实现，使用者只需关注其接口。<br>CacheStrategy.Factory、ThreadFactory、EventListener.Factory（调用create()根据call创建EventListener）。<br>3.外观模式：<br>说明：统一一个类对调用者提供一系列接口，隐藏内部系统的复杂性。<br>OkHttpClient类 调用者的调用接口都是通过OkHttpClient完成。<br>4.责任链模式：<br>说明：一个请求需要经过多个处理者进行责任处理才能完成。没有处理者都有一个特点：前一个处理者对象会持有下一个处理者对象的引用形成一条链，请求发生时，沿着这条链传递。<br>拦截器链。<br>5.单例模式：<br>说明：自己创建自己的唯一实例。<br>OkHttpClient在项目中使用需要用单例。</li>
+<li><p>OkHttp中用到了哪些设计模式？<br>1.建造者模式（Builder模式）适合构造函数入参多而杂的情况下使用：<br>说明：使用一个Builder类一步步构建最终的对象。目标对象是由多个“配置”组合构造出来的。<br>OkHttpClient、Request、Response、Headers、HttpUrl都是用了构造者模式。<br>2.工厂模式：<br>说明：创建目标对象不需要对对象使用者暴露创建逻辑，对外屏蔽对象具体实现，使用者只需关注其接口。<br>CacheStrategy.Factory、ThreadFactory、EventListener.Factory（调用create()根据call创建EventListener）。<br>3.外观模式：<br>说明：统一一个类对调用者提供一系列接口，隐藏内部系统的复杂性。<br>OkHttpClient类 调用者的调用接口都是通过OkHttpClient完成。<br>4.责任链模式：<br>说明：一个请求需要经过多个处理者进行责任处理才能完成。没有处理者都有一个特点：前一个处理者对象会持有下一个处理者对象的引用形成一条链，请求发生时，沿着这条链传递。<br>拦截器链。<br>5.单例模式：<br>说明：自己创建自己的唯一实例。<br>OkHttpClient在项目中使用需要用单例。</p>
+</li>
+<li><p>OkHttp在项目中做了哪些封装？<br>OkHttpClient做了单例</p>
+</li>
 </ul>
 <p>感谢：<br><a href="https://www.jianshu.com/p/fa0dcbfe05cd" target="_blank" rel="noopener">https://www.jianshu.com/p/fa0dcbfe05cd</a><br><a href="https://www.runoob.com/design-pattern/chain-of-responsibility-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/chain-of-responsibility-pattern.html</a></p>
 
@@ -158,6 +161,11 @@
   
       <div class="post-nav-item post-nav-prev">
           
+          <a href="/2021/02/07/控制反转和依赖注入/" rel="prev" title="控制反转和依赖注入">
+            控制反转和依赖注入
+          </a>
+          <span>〉</span>
+        
       </div>
     </div>
   
