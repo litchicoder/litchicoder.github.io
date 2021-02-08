@@ -15,11 +15,11 @@
   
 
   
-    <meta name="description" content="litchi,litchi blog">
+    <meta name="description" content="泛型">
   
   
   <link rel="icon" type="image/x-icon" href="/logo.png">
-  <title>archives [ litchi ]</title>
+  <title>泛型 [ litchi ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -46,7 +46,7 @@
           
       
           
-            <li class="pure-menu-item actived"><a href="/archives" class="pure-menu-link">归档</a></li>
+            <li class="pure-menu-item"><a href="/archives" class="pure-menu-link">归档</a></li>
           
       
           
@@ -68,243 +68,94 @@
 
   <div class="container" id="content-outer">
     <div class="inner" id="content-inner">
-      
+      <div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">
+        泛型
+      </h1>
+      <span>
+        
+        <time class="time" datetime="2021-02-08T06:35:41.000Z">
+        2021-02-08
+      </time>
+        
+      </span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+      <span class="post-tags">
+        
+      </span>
+    </span>
+      <span class="slash">/</span>
+      <span class="read">
+      <span id="busuanzi_value_page_pv"></span> 点击
+    </span>
+      <span class="slash">/</span>
+    </header>
 
-  
-  
+    <div class="post-content">
+      <p>JAVA中泛型简单讲就是将类型参数化，可以用在类、接口和方法。  </p>
+<p>泛型类：  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassA</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"class is"</span> + t.getClass());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>泛型接口：  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IA</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="function">T <span class="title">getThing</span><span class="params">()</span></span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>泛型方法：  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"class is"</span> + t.getClass());</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>泛型只在编译期有效，编译后生成的字节码中不包含泛型信息，也就是在编译结束后泛型被去除了。即泛型擦除。泛型被擦除后变成了什么呢？  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; listA = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">listA.add(<span class="number">12</span>);</span><br><span class="line">System.out.println(<span class="string">"listA type is"</span> + (listA.get(<span class="number">0</span>).getClass()));</span><br></pre></td></tr></table></figure>
+<p>运行结果：  </p>
+<blockquote>
+<p>listA type isclass java.lang.Integer</p>
+</blockquote>
+<p>listA编译后泛型转化成了实际对象类型Integer。</p>
+<ul>
+<li>有界通配符</li>
+</ul>
+<p><code>MyClass&lt;? extends Number&gt;</code>  有上限，须继承Number类；</p>
+<p><code>MyClass&lt;? super String&gt;</code>有下限，须是String类的父类，如Object</p>
+<ul>
+<li>静态方法不能使用类定义的泛型，因为静态方法调用时，类还没有初始化，且方法在栈中，类的实例化在堆区。</li>
+</ul>
+
+    </div>
+
+    <div>全文完。</div>
+  </article>
+  <div class="toc-container">
     
-    
-    <section class="post page archives">
-      <h3 class="archive-year-wrap">
-        <a href="/archives/2020" class="archive-year">
-          2020
-        </a>
-      </h3>
-      <div class="archives">
+
+  </div>
+</div>
+<div class="copyright">
+    <span>本作品采用</span>
+    <a href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>
+    <span>进行许可。 转载时请注明原文链接。</span>
+</div>
+<div class="share" style="width: 100%;">
   
-  <div class="archive" >
-  <a class="post-go" href="/2020/04/13/栈和队列/">
-    <div>
-      <span class="date">
-        04-13
-      </span>
-      <span class="slash">/</span>
-      栈和队列
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
 </div>
 
   
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/2021/02/07/控制反转和依赖注入/" rel="next" title="控制反转和依赖注入">
+          控制反转和依赖注入
+          </a>
+        
+      </div>
   
-  <div class="archive" >
-  <a class="post-go" href="/2020/04/08/线性表/">
-    <div>
-      <span class="date">
-        04-08
-      </span>
-      <span class="slash">/</span>
-      线性表
+      <div class="post-nav-item post-nav-prev">
+          
+      </div>
     </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
   
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/04/07/时间复杂度和空间复杂度/">
-    <div>
-      <span class="date">
-        04-07
-      </span>
-      <span class="slash">/</span>
-      时间复杂度和空间复杂度
-    </div>
 
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2020/02/05/面试积累/">
-    <div>
-      <span class="date">
-        02-05
-      </span>
-      <span class="slash">/</span>
-      面试积累
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-    
-      </div></section>
-    
-    
-    <section class="post page archives">
-      <h3 class="archive-year-wrap">
-        <a href="/archives/2018" class="archive-year">
-          2018
-        </a>
-      </h3>
-      <div class="archives">
-  
-  <div class="archive" >
-  <a class="post-go" href="/2018/06/28/Android数据的持久化/">
-    <div>
-      <span class="date">
-        06-28
-      </span>
-      <span class="slash">/</span>
-      Android数据的持久化
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!--<p>常见的存储的方式为SQlite数据存储、xml存储以及自定义数据格式的存储方式<br>-->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-    
-      </div></section>
-    
-    
-    <section class="post page archives">
-      <h3 class="archive-year-wrap">
-        <a href="/archives/2017" class="archive-year">
-          2017
-        </a>
-      </h3>
-      <div class="archives">
-  
-  <div class="archive" >
-  <a class="post-go" href="/2017/11/24/android-中gradle依赖冲突解决/">
-    <div>
-      <span class="date">
-        11-24
-      </span>
-      <span class="slash">/</span>
-      android 中gradle依赖冲突解决
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2017/11/07/git基础知识/">
-    <div>
-      <span class="date">
-        11-07
-      </span>
-      <span class="slash">/</span>
-      git基础知识
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2017/11/06/设计模式之工厂模式/">
-    <div>
-      <span class="date">
-        11-06
-      </span>
-      <span class="slash">/</span>
-      设计模式之工厂模式
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2017/11/06/Markdown常用语法/">
-    <div>
-      <span class="date">
-        11-06
-      </span>
-      <span class="slash">/</span>
-      Markdown常用语法
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!---->
-    <!--</div>-->
-  </a>
-
-</div>
-
-  
-  
-  <div class="archive" >
-  <a class="post-go" href="/2017/11/03/hexo-command-line/">
-    <div>
-      <span class="date">
-        11-03
-      </span>
-      <span class="slash">/</span>
-      hexo command line
-    </div>
-
-    <!--<div class="excerpt">-->
-      <!--<h1 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h1 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>-->
-    <!--</div>-->
-  </a>
-
-</div>
-
-
-  </div></section>
 
     </div>
 
-    
-      <nav class="page-nav text-center">
-          <a class="extend prev" rel="prev" href="/archives/page/4/">〈</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/6/">〉</a>
-      </nav>
     
 
   </div>

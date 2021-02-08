@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>泛型</title>
+      <link href="/2021/02/08/%E6%B3%9B%E5%9E%8B/"/>
+      <url>/2021/02/08/%E6%B3%9B%E5%9E%8B/</url>
+      
+        <content type="html"><![CDATA[<p>JAVA中泛型简单讲就是将类型参数化，可以用在类、接口和方法。  </p><p>泛型类：  </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassA</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"class is"</span> + t.getClass());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>泛型接口：  </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IA</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="function">T <span class="title">getThing</span><span class="params">()</span></span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><p>泛型方法：  </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"class is"</span> + t.getClass());</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure><p>泛型只在编译期有效，编译后生成的字节码中不包含泛型信息，也就是在编译结束后泛型被去除了。即泛型擦除。泛型被擦除后变成了什么呢？  </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; listA = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">listA.add(<span class="number">12</span>);</span><br><span class="line">System.out.println(<span class="string">"listA type is"</span> + (listA.get(<span class="number">0</span>).getClass()));</span><br></pre></td></tr></table></figure><p>运行结果：  </p><blockquote><p>listA type isclass java.lang.Integer</p></blockquote><p>listA编译后泛型转化成了实际对象类型Integer。</p><ul><li>有界通配符</li></ul><p><code>MyClass&lt;? extends Number&gt;</code>  有上限，须继承Number类；</p><p><code>MyClass&lt;? super String&gt;</code>有下限，须是String类的父类，如Object</p><ul><li>静态方法不能使用类定义的泛型，因为静态方法调用时，类还没有初始化，且方法在栈中，类的实例化在堆区。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> JAVA基础 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>控制反转和依赖注入</title>
       <link href="/2021/02/07/%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"/>
       <url>/2021/02/07/%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</url>
