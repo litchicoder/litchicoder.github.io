@@ -131,6 +131,7 @@
 <p>4.泛型不能是基本数据类型；  </p>
 <p>5.Gson在运行时使用常量池中泛型标签信息解析数据到泛型；</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Type componentType = ((GenericArrayType)type).getGenericComponentType();</span><br></pre></td></tr></table></figure>
+<p>6.静态方法不能使用类定义的泛型，因为在静态方法调用时，类对象可能还没有实例化，类定义泛型是在类实例化时执行，所在的内存区域也是不一样的。</p>
 <h2><span id="感谢">感谢</span></h2><p><a href="https://www.cnblogs.com/huansky/p/8043149.html" target="_blank" rel="noopener">https://www.cnblogs.com/huansky/p/8043149.html</a><br><a href="https://stackoverflow.com/questions/937933/where-are-generic-types-stored-in-java-class-files" target="_blank" rel="noopener">https://stackoverflow.com/questions/937933/where-are-generic-types-stored-in-java-class-files</a></p>
 
     </div>

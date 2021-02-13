@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>/2021/01/12/java%E5%B1%80%E9%83%A8%E5%86%85%E9%83%A8%E7%B1%BB%E8%AE%BF%E9%97%AE%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81final%E6%9D%A5%E4%BF%AE%E9%A5%B0%EF%BC%9F/</loc>
+    
+    <lastmod>2021-02-13T08:26:37.453Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>/2021/02/08/%E6%B3%9B%E5%9E%8B/</loc>
     
-    <lastmod>2021-02-13T06:57:37.008Z</lastmod>
+    <lastmod>2021-02-13T07:48:57.866Z</lastmod>
     
   </url>
   
@@ -61,13 +68,6 @@
     <loc>/2020/05/13/%E5%85%B3%E9%94%AE%E5%AD%97volatile%E5%92%8Csynchronized/</loc>
     
     <lastmod>2021-01-14T08:45:12.910Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>/2021/01/12/java%E5%B1%80%E9%83%A8%E5%86%85%E9%83%A8%E7%B1%BB%E8%AE%BF%E9%97%AE%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81final%E6%9D%A5%E4%BF%AE%E9%A5%B0%EF%BC%9F/</loc>
-    
-    <lastmod>2021-01-12T13:00:52.233Z</lastmod>
     
   </url>
   
